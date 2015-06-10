@@ -223,7 +223,7 @@ public abstract class AccountsEndpoint extends SecuredEndpoint {
                 return status(NOT_FOUND).build();
             } else {
                 // make sure the logged user can access this account
-                secureByAccount(getKeycloakAccessToken(), account);
+                secureByAccount(account);
                 if (APPLICATION_XML_TYPE == responseType) {
                     final RestCommResponse response = new RestCommResponse(account);
                     return ok(xstream.toXML(response), APPLICATION_XML).build();
@@ -264,7 +264,7 @@ public abstract class AccountsEndpoint extends SecuredEndpoint {
     protected Response getAccounts(final MediaType responseType) {
         String username = getLoggedUsername(); // i.e. emailAddress
         try {
-            secureApi("RestComm:Read:Accounts", getKeycloakAccessToken());
+            secureApi("RestComm:Read:Accounts");
         } catch(final AuthorizationException exception) {
             return status(UNAUTHORIZED).build();
         }
@@ -292,7 +292,7 @@ public abstract class AccountsEndpoint extends SecuredEndpoint {
         // check API access only
         String username = getLoggedUsername(); // i.e. emailAddress
         try {
-            secureApi("RestComm:Create:Accounts", getKeycloakAccessToken());
+            secureApi("RestComm:Create:Accounts");
         } catch(final AuthorizationException exception) {
             return status(UNAUTHORIZED).build();
         }

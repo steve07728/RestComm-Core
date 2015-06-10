@@ -24,6 +24,8 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
     protected KeycloakClient keycloakClient;
     protected static RestcommRoles restcommRoles;
 
+    public static final String SECURITY_MODE = "standalone"; // TODO move this to the restcomm configuration
+
     public SecuredEndpoint() {
         super();
     }
@@ -40,8 +42,26 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
         secureKeycloak(account, permission, getKeycloakAccessToken());
     }
 
+    protected void secureApi(String neededPermissionString) {
+        if ( SECURITY_MODE.equals("standalone") ) {
+            secureApiShiro(neededPermissionString);
+        } else {
+            secureApiKeycloak(neededPermissionString);
+        }
+    }
+
+    private void secureApiKeycloak(String neededPermissionString) {
+        final AccessToken accessToken = getKeycloakAccessToken();
+        secureApi(neededPermissionString, accessToken);
+    }
+
+    private void secureApiShiro(String neededPermissionString) {
+        // TODO implement with shiro. For now all requests allowed
+        logger.info("secureApi: Using standalone security mode" );
+    }
+
     // check if the user with the roles in accessToken can access has the following permissions (on the API)
-    protected void secureApi(String neededPermissionString, final AccessToken accessToken) {
+    private void secureApi(String neededPermissionString, final AccessToken accessToken) {
         // normalize the permission string
         neededPermissionString = "domain:" + neededPermissionString;
 
@@ -82,15 +102,29 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
         }
         throw new AuthorizationException();
     }
-
     private void secureKeycloak(final Account account, final String neededPermissionString, final AccessToken accessToken) {
         secureApi(neededPermissionString, accessToken);
         // check if the logged user has access to the account that is operated upon
         secureByAccount(accessToken, account);
     }
 
-    // uses keycloak token
+
+
     protected String getLoggedUsername() {
+        if ( SECURITY_MODE.equals("standalone") ) {
+            return getLoggedUsernameShiro();
+        } else {
+            return getLoggedUsernameKeycloak();
+        }
+    }
+
+    private String getLoggedUsernameShiro() {
+        // TODO put some propert implementation here
+        logger.warn("getLoggedUsernameShiro: Returnig hardcoded value for ousername" );
+        return "otsakir";
+    }
+
+    private String getLoggedUsernameKeycloak() {
         KeycloakSecurityContext session = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
         if (session.getToken() != null) {
             return session.getToken().getPreferredUsername();
@@ -102,7 +136,7 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
      * is the same as the account username. When the organization concepts are implemented and hierarchical accounts are created a smarter
      * approach that will allow parant users access the resources of their children should be employed.
      */
-    protected void secureByAccount(final AccessToken accessToken, final Account account) {
+    private void secureByAccount(final AccessToken accessToken, final Account account) {
         // load logged user's account
         Account loggedAccount = accountsDao.getAccount(accessToken.getPreferredUsername());
         if ( loggedAccount != null && loggedAccount.getSid() != null ) {
@@ -113,6 +147,25 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
                 throw new UnauthorizedException("User cannot access resources for the specified account.");
             }
         }
+    }
+
+
+    protected void secureByAccount(final Account account) {
+        if ( SECURITY_MODE.equals("standalone") ) {
+            secureByAccountShiro(account);
+        } else {
+            secureByAccountKeycloak(account);
+        }
+    }
+
+    private void secureByAccountKeycloak(final Account account) {
+        final AccessToken accessToken = getKeycloakAccessToken();
+        secureByAccount(accessToken, account);
+    }
+
+    private void secureByAccountShiro(final Account account) {
+        // TODO add a propert implementation
+        logger.warn("secureByAccountShiro: missing implementation" );
     }
 
     // does the accessToken contain the role?
@@ -131,7 +184,7 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
             throw new UnauthorizedException("Role "+role+" is missing from token");
     }*/
 
-    protected AccessToken getKeycloakAccessToken() {
+    private AccessToken getKeycloakAccessToken() {
         KeycloakSecurityContext session = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
         AccessToken accessToken = session.getToken();
         return accessToken;
