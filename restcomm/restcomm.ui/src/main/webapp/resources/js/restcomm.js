@@ -1,10 +1,10 @@
 var rcMod = angular.module('rcApp', [
-  'ngRoute',
+  'ui.router',
   'rcApp.filters',
   'rcApp.services',
   'rcApp.directives',
   'rcApp.controllers',
-  'rcApp.restcommApps',
+  //'rcApp.restcommApps',
   'ngResource',
   'ui.bootstrap',
   'angular-md5',
@@ -17,6 +17,80 @@ var rcMod = angular.module('rcApp', [
   'ngSanitize'
 ]);
 
+
+
+rcMod.config(function($stateProvider, $urlRouterProvider) {
+
+	  $urlRouterProvider.when('/numbers', '/numbers/incoming');
+	  $urlRouterProvider.when('/logs', '/logs/calls');
+	  
+	  $urlRouterProvider.otherwise("/dashboard");
+
+	  // Now set up the states
+	  $stateProvider
+	  .state('profile', {
+	      url: "/profile",
+	      templateUrl: "modules/profile.html",
+	      controller: "ProfileCtrl"
+	  })
+	  .state('profile.account', {url: "/:accountSid",templateUrl: "modules/profile.html",controller: "ProfileCtrl"})
+	  .state('dashboard', {url: "/dashboard",templateUrl: "modules/dashboard.html",controller: "DashboardCtrl"})
+	  .state('numbers', {})
+	  .state('numbers.incoming', { url: '/numbers/incoming', templateUrl: 'modules/numbers-incoming.html', controller: 'NumbersCtrl' })
+	  .state('numbers.registerIncoming', {url: '/register-incoming',templateUrl: 'modules/numbers-incoming-register.html',controller: 'NumberRegisterCtrl',
+		  resolve: {
+			  $modalInstance : function() { return undefined; },
+			  allCountries : function(RCommAvailableNumbers) { return RCommAvailableNumbers.getCountries().$promise; },
+			  providerCountries: function(RCommAvailableNumbers, AuthService) { return RCommAvailableNumbers.getAvailableCountries({accountSid:AuthService.getLoggedSid()}).$promise; }
+		  }
+	  })
+	  .state('numbers.incoming.details', { 
+		  url:'/numbers/incoming/:phoneSid', 
+		  templateUrl:'modules/numbers-incoming-details.html',
+		  controller: 'NumberDetailsCtrl',
+		  resolve: { $modalInstance : function() {return undefined;}, allCountries : function() {return undefined;}, providerCountries : function() {return undefined;},	localApps: function (rappService) { return rappService.refreshLocalApps();}}	  
+	  })
+	  .state('numbers.clients', {url: '/numbers/clients', templateUrl: 'modules/numbers-clients.html', controller: 'ClientsCtrl'})
+	  .state('numbers.clients.details', {
+		  url:'/numbers/clients/:clientSid',
+		  templateUrl: 'modules/numbers-clients-details.html', 
+		  controller: 'ClientDetailsCtrl', 
+		  resolve: { $modalInstance : function() {return undefined;} }
+	  })
+	  .state('numbers.outgoing', {
+		  url: '/numbers/outgoing',
+		  templateUrl: 'modules/numbers-outgoing.html', 
+		  controller: 'OutgoingCtrl'
+	  })
+	  .state('numbers.shortcodes', {url:'/numbers/shortcodes', templateUrl: 'modules/numbers-shortcodes.html', controller: 'MainCtrl'})
+	  .state('numbers.porting', {url:'/numbers/porting',templateUrl: 'modules/numbers-porting.html', controller: 'MainCtrl'} )
+	  .state('logs',{})
+	  .state('logs.calls',{url: '/logs/calls' ,templateUrl: 'modules/logs-calls.html', controller: 'LogsCallsCtrl'})
+	  .state('logs.calls.details', {url:'/logs/calls/:callSid', templateUrl: 'modules/logs-calls-details.html', controller: 'LogsCallsDetailsCtrl', resolve: { $modalInstance : function() {return undefined;}, callSid: function() {} }})
+	  .state('logs.messages', {url:'/logs/messages', templateUrl: 'modules/logs-messages.html', controller: 'LogsMessagesCtrl' })
+	  .state('logs.recordings', {url:'/logs/recordings',templateUrl: 'modules/logs-recordings.html', controller: 'LogsRecordingsCtrl'})
+	  .state('logs.transcriptions', {url: '/logs/transcriptions',templateUrl: 'modules/logs-transcriptions.html', controller: 'LogsTranscriptionsCtrl'})
+	  .state('logs.notifications', {url:'/logs/notifications', templateUrl: 'modules/logs-notifications.html', controller: 'LogsNotificationsCtrl'})
+	  .state('usage', {url:'/usage', templateUrl: 'modules/usage.html', controller: 'MainCtrl' })
+	  .state('providers', {url:'providers',templateUrl: 'modules/providers.html', controller: 'MainCtrl'})
+	  .state('register', {url: '/register',templateUrl: 'modules/register.html',controller: 'RegisterCtrl'})
+	  .state('ras', {url:'/ras',templateUrl: 'modules/rappmanager.html', 
+		controller: 'RappManagerCtrl', 
+		resolve: {
+			products: rappManagerCtrl.getProducts, 
+			localApps: function (rappService) { return rappService.refreshLocalApps();}
+		}})
+	  .state('ras.config',{url:'/ras/config/:projectName/:mode?', templateUrl: 'modules/rappmanager-config.html', 
+		controller: 'RappManagerConfigCtrl', 
+		resolve: { 
+			rappConfig : function (rappService, $route) { return rappService.getAppConfig($route.current.params.projectName);}, //, $route.current.params.mode); },
+			rapp: function (rappService, $route) {return rappService.getApp($route.current.params.projectName);},
+			bootstrapObject : function (rappService, $route) { return rappService.getBoostrapObject($route.current.params.projectName); }
+		}})
+	  ;
+});
+
+/*	  
 rcMod.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.
     when('/login', {templateUrl: 'modules/login.html', controller: 'LoginCtrl'}).
@@ -54,6 +128,7 @@ rcMod.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
 
   // $locationProvider.html5Mode(true);
 }]);
+*/
 
 rcMod.directive('equals', function() {
   return {

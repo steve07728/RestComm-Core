@@ -55,13 +55,13 @@ rcMod.controller('NumbersCtrl', function ($scope, $resource, $modal, $dialog, $r
 
 // Numbers : Incoming : Details (also used for Modal) --------------------------
 
-var NumberDetailsCtrl = function ($scope, $routeParams, $location, $dialog, $modalInstance, AuthService, RCommNumbers, RCommApps, RCommAvailableNumbers, Notifications, allCountries, providerCountries, localApps, $rootScope) {
+var NumberDetailsCtrl = function ($scope, $stateParams, $location, $dialog, $modalInstance, AuthService, RCommNumbers, RCommApps, RCommAvailableNumbers, Notifications, allCountries, providerCountries, localApps, $rootScope) {
 
   // are we editing details...
-  //if($scope.phoneSid === $routeParams.phoneSid) {
+  //if($scope.phoneSid === $stateParams.phoneSid) {
 
     $scope.sid = AuthService.getLoggedSid();
-    $scope.phoneSid = $routeParams.phoneSid;
+    $scope.phoneSid = $stateParams.phoneSid;
 
     $scope.numberDetails = RCommNumbers.get({accountSid:$scope.sid, phoneSid: $scope.phoneSid});
 
@@ -144,7 +144,7 @@ var NumberDetailsCtrl = function ($scope, $routeParams, $location, $dialog, $mod
   }
 };
 
-var NumberRegisterCtrl = function ($scope, $routeParams, $location, $http, $dialog, $modalInstance, AuthService, RCommNumbers, RCommApps, RCommAvailableNumbers, Notifications, allCountries, providerCountries) {
+var NumberRegisterCtrl = function ($scope, $stateParams, $location, $http, $dialog, $modalInstance, AuthService, RCommNumbers, RCommApps, RCommAvailableNumbers, Notifications, allCountries, providerCountries) {
 
   $scope.sid = AuthService.getLoggedSid();
 

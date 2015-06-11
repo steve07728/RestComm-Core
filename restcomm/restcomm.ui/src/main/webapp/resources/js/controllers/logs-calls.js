@@ -82,9 +82,9 @@ rcMod.controller('LogsCallsCtrl', function($scope, $resource, $timeout, $modal, 
   $scope.getCallsList(0);
 });
 
-rcMod.controller('LogsCallsDetailsCtrl', function($scope, $routeParams, $resource, $modalInstance, AuthService, RCommLogsCalls, callSid) {
+rcMod.controller('LogsCallsDetailsCtrl', function($scope, $stateParams, $resource, $modalInstance, AuthService, RCommLogsCalls, callSid) {
   $scope.sid = AuthService.getLoggedSid(); // SessionService.get("sid");
-  $scope.callSid = $routeParams.callSid || callSid;
+  $scope.callSid = $stateParams.callSid || callSid;
 
   $scope.closeCallDetails = function () {
     $modalInstance.dismiss('cancel');

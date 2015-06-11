@@ -70,18 +70,18 @@ rcMod.controller('MenuCtrl', function($scope, $http, $resource, $rootScope, $loc
 
 });
 
-rcMod.controller('ProfileCtrl', function($scope, $resource, $routeParams, SessionService, RCommAccounts, md5, Auth, AuthService) {
+rcMod.controller('ProfileCtrl', function($scope, $resource, $stateParams, SessionService, RCommAccounts, md5, Auth, AuthService) {
   $scope.sid = SessionService.get('sid');
 	console.log("IN ProfileCtrl");
 	
-	var locationAccountSid = $routeParams.accountSid;
+	var locationAccountSid = $stateParams.accountSid;
 	console.log("locationAccountSid: " + locationAccountSid);
 	
 	var accountBackup = {};
 	
 	// it there is another account specified in the location bar, try to load this one
-	if ( $routeParams.accountSid ) {
-		$scope.account = RCommAccounts.view({format:'json', accountSid: $routeParams.accountSid}, function (account) {
+	if ( $stateParams.accountSid ) {
+		$scope.account = RCommAccounts.view({format:'json', accountSid: $stateParams.accountSid}, function (account) {
 			angular.copy(account, accountBackup);
 			console.log("received account");
 			console.log(accountBackup);
@@ -169,7 +169,7 @@ rcMod.controller('ProfileCtrl', function($scope, $resource, $routeParams, Sessio
   $scope.getAccounts = function() {
     $scope.accounts = RCommAccounts.query(function(data){
       angular.forEach(data, function(value){
-        if(value.sid == $routeParams.accountSid) {
+        if(value.sid == $stateParams.accountSid) {
           $scope.account = angular.copy(value);
           accountBackup = angular.copy(value);
         }

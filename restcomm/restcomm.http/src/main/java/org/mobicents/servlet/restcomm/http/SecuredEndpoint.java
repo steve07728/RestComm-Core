@@ -24,7 +24,7 @@ public abstract class SecuredEndpoint extends AbstractEndpoint {
     protected KeycloakClient keycloakClient;
     protected static RestcommRoles restcommRoles;
 
-    public static final String SECURITY_MODE = "standalone"; // TODO move this to the restcomm configuration
+    public static final String SECURITY_MODE = "cloud"; // TODO move this to the restcomm configuration
 
     public SecuredEndpoint() {
         super();

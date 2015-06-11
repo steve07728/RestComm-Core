@@ -1,4 +1,4 @@
-var rappManagerCtrl = angular.module("rcApp.restcommApps").controller('RappManagerCtrl', function($scope, $upload, $location, products, localApps, $sce, $route, Notifications, rappManagerConfig, $filter) {	
+var rappManagerCtrl = angular.module("rcApp.controllers").controller('RappManagerCtrl', function($scope, $upload, $location, products, localApps, $sce, Notifications, rappManagerConfig, $filter) {	
 	
 	/* Sample list item
 	{

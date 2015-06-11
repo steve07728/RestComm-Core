@@ -52,9 +52,9 @@ rcMod.controller('LogsNotificationsCtrl', function ($scope, $resource, $timeout,
 
 });
 
-rcMod.controller('LogsNotificationsDetailsCtrl', function($scope, $routeParams, $resource, $modalInstance, AuthService, RCommLogsNotifications, notificationSid) {
+rcMod.controller('LogsNotificationsDetailsCtrl', function($scope, $stateParams, $resource, $modalInstance, AuthService, RCommLogsNotifications, notificationSid) {
   $scope.sid = AuthService.getLoggedSid(); // SessionService.get("sid");
-  $scope.notificationSid = $routeParams.notificationSid || notificationSid;
+  $scope.notificationSid = $stateParams.notificationSid || notificationSid;
 
   $scope.closeNotificationDetails = function () {
     $modalInstance.dismiss('cancel');

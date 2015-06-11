@@ -51,9 +51,9 @@ rcMod.controller('LogsMessagesCtrl', function ($scope, $resource, $timeout, $mod
 
 });
 
-rcMod.controller('LogsMessagesDetailsCtrl', function($scope, $routeParams, $resource, $modalInstance, AuthService, RCommLogsMessages, messageSid) {
+rcMod.controller('LogsMessagesDetailsCtrl', function($scope, $stateParams, $resource, $modalInstance, AuthService, RCommLogsMessages, messageSid) {
   $scope.sid =AuthService.getLoggedSid(); // SessionService.get("sid");
-  $scope.messageSid = $routeParams.messageSid || messageSid;
+  $scope.messageSid = $stateParams.messageSid || messageSid;
 
   $scope.closeMessageDetails = function () {
     $modalInstance.dismiss('cancel');

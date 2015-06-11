@@ -2,7 +2,7 @@
 
 var rcMod = angular.module('rcApp');
 
-rcMod.controller('DashboardCtrl', function ($scope, $resource, $route, $rootScope, AuthService, Auth, RCommStatistics) {
+rcMod.controller('DashboardCtrl', function ($scope, $resource, $rootScope, AuthService, Auth, RCommStatistics) {
 	var Account = Auth.restcommAccount;
 	$scope.sid = Account.sid;
 	$scope.accountData = Account; 

@@ -1,4 +1,4 @@
-var rappManagerConfigCtrl = angular.module("rcApp.restcommApps").controller('RappManagerConfigCtrl', function($scope, $upload, $routeParams, rappConfig, rapp, bootstrapObject, $http, Notifications, $window, rappService, $sce) {
+var rappManagerConfigCtrl = angular.module("rcApp.controllers").controller('RappManagerConfigCtrl', function($scope, $upload, $stateParams, rappConfig, rapp, bootstrapObject, $http, Notifications, $window, rappService, $sce) {
 	
 	$scope.initRappConfig = function (rappConfig, bootstrapObj) {
 		var i;
@@ -89,7 +89,7 @@ var rappManagerConfigCtrl = angular.module("rcApp.restcommApps").controller('Rap
 	
 	
 	
-	$scope.projectName = $routeParams.projectName;
+	$scope.projectName = $stateParams.projectName;
 	$scope.rappConfig = rappConfig;
 	$scope.rapp = rapp;
 	$scope.bootstrapObject = bootstrapObject;

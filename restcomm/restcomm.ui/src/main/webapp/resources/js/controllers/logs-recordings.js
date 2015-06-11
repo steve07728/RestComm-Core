@@ -51,9 +51,9 @@ rcMod.controller('LogsRecordingsCtrl', function($scope, $resource, $timeout, $mo
 
 });
 
-rcMod.controller('LogsRecordingsDetailsCtrl', function($scope, $routeParams, $resource, $modalInstance, AuthService, RCommLogsRecordings, recordingSid) {
+rcMod.controller('LogsRecordingsDetailsCtrl', function($scope, $stateParams, $resource, $modalInstance, AuthService, RCommLogsRecordings, recordingSid) {
   $scope.sid = AuthService.getLoggedSid(); // SessionService.get("sid");
-  $scope.recordingSid = $routeParams.recordingSid || recordingSid;
+  $scope.recordingSid = $stateParams.recordingSid || recordingSid;
 
   $scope.closeRecordingDetails = function () {
     $modalInstance.dismiss('cancel');
