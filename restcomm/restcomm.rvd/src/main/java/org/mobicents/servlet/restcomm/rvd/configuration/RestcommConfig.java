@@ -1,22 +1,22 @@
-package org.mobicents.servlet.restcomm.rvd.model;
+package org.mobicents.servlet.restcomm.rvd.configuration;
 
 /**
  * Model class for storing restcomm configuration options. Initially used for putting host/port info
  * @author "Tsakiridis Orestis"
  *
  */
-public class ApiServerConfig {
+public class RestcommConfig {
 
     String host;
     int port;
 
-    public ApiServerConfig(String host, int port) {
+    public RestcommConfig(String host, int port) {
         super();
         this.host = host;
         this.port = port;
     }
 
-    public ApiServerConfig() {
+    public RestcommConfig() {
         // TODO Auto-generated constructor stub
     }
 

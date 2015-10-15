@@ -37,24 +37,22 @@ import org.mobicents.servlet.restcomm.rvd.ProjectAwareRvdContext;
 import org.mobicents.servlet.restcomm.rvd.ProjectService;
 import org.mobicents.servlet.restcomm.rvd.RvdContext;
 import org.mobicents.servlet.restcomm.rvd.RvdConfiguration;
+import org.mobicents.servlet.restcomm.rvd.configuration.RestcommConfig;
 import org.mobicents.servlet.restcomm.rvd.exceptions.RvdException;
 import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.CallControlBadRequestException;
 import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.CallControlException;
 import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.CallControlInvalidConfigurationException;
-import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.RestcommConfigNotFound;
-import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.RvdErrorParsingRestcommXml;
 import org.mobicents.servlet.restcomm.rvd.exceptions.callcontrol.UnauthorizedCallControlAccess;
 import org.mobicents.servlet.restcomm.rvd.http.RestService;
 import org.mobicents.servlet.restcomm.rvd.interpreter.Interpreter;
 import org.mobicents.servlet.restcomm.rvd.interpreter.exceptions.RemoteServiceError;
-import org.mobicents.servlet.restcomm.rvd.model.ApiServerConfig;
 import org.mobicents.servlet.restcomm.rvd.model.CallControlInfo;
 import org.mobicents.servlet.restcomm.rvd.model.ModelMarshaler;
 import org.mobicents.servlet.restcomm.rvd.model.ProjectSettings;
 import org.mobicents.servlet.restcomm.rvd.model.callcontrol.CallControlAction;
 import org.mobicents.servlet.restcomm.rvd.model.callcontrol.CallControlStatus;
 import org.mobicents.servlet.restcomm.rvd.model.client.ProjectItem;
-import org.mobicents.servlet.restcomm.rvd.model.client.SettingsModel;
+import org.mobicents.servlet.restcomm.rvd.model.client.WorkspaceSettings;
 import org.mobicents.servlet.restcomm.rvd.restcomm.RestcommAccountInfoResponse;
 import org.mobicents.servlet.restcomm.rvd.restcomm.RestcommCreateCallResponse;
 import org.mobicents.servlet.restcomm.rvd.restcomm.RestcommClient;
@@ -85,12 +83,17 @@ public class RvdController extends RestService {
     private WorkspaceStorage workspaceStorage;
     private ModelMarshaler marshaler;
 
+    RvdConfiguration configuration;
+
 
     void init(RvdContext rvdContext) {
+        configuration = RvdConfiguration.getInstance();
+
         this.rvdContext = rvdContext;
         rvdSettings = rvdContext.getSettings();
         marshaler = rvdContext.getMarshaler();
         workspaceStorage = rvdContext.getWorkspaceStorage();
+
     }
 
     private Response runInterpreter( ProjectAwareRvdContext rvdContext, String appname, HttpServletRequest httpRequest, MultivaluedMap<String, String> requestParams ) {
@@ -226,48 +229,7 @@ public class RvdController extends RestService {
     // *** Call control functionality ***
     // **********************************
 
-    private String extractRecordingsUrlFromRestcommConfig(File file) throws CallControlException {
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder;
-        try {
-            docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse (file);
-            XPathFactory xPathfactory = XPathFactory.newInstance();
-            XPath xpath = xPathfactory.newXPath();
-            XPathExpression expr = xpath.compile("/restcomm/runtime-settings/recordings-uri/text()");
-            String recordingsUrl = (String) expr.evaluate(doc, XPathConstants.STRING);
 
-            return recordingsUrl.trim();
-        } catch (Exception e) {
-            throw new CallControlException("Error parsing restcomm config file: " + file.getPath(), e);
-        }
-
-    }
-    /**
-     * Retrieves restcomm.xml dependent information, host ip and port
-     */
-    private ApiServerConfig getApiServerConfig( String filesystemContextPath) throws CallControlException {
-        ApiServerConfig config = new ApiServerConfig();
-
-        // Load restcomm configuration. Only the fields we are interested in. See RestcommXml model class
-        String restcommConfigPath = filesystemContextPath + "../restcomm.war/WEB-INF/conf/restcomm.xml";
-        File file = new File(restcommConfigPath);
-        if ( !file.exists() ) {
-            throw new RestcommConfigNotFound("Cannot find restcomm configuration file at: " + restcommConfigPath);
-        }
-        String recordingsUrl = extractRecordingsUrlFromRestcommConfig(file);
-
-        // Extract the settings we are interested in from the recordings url. We could also any other containing host and port information
-        URIBuilder uriBuilder;
-        try {
-            uriBuilder = new URIBuilder(recordingsUrl);
-            config.setHost( uriBuilder.getHost() );
-            config.setPort( uriBuilder.getPort() );
-            return config;
-        } catch (URISyntaxException e) {
-            throw new RvdErrorParsingRestcommXml("Error extracting host and port information from recordings-uri in restcomm.xml: " + recordingsUrl);
-        }
-    }
 
     /**
      * Runs a query on Restcomm numbers api and tries to match an application named X with its number. If any match is found it returns it
@@ -305,26 +267,26 @@ public class RvdController extends RestService {
         }
 
         // Load configuration from Restcomm
-        ApiServerConfig apiServerConfig = getApiServerConfig(servletContext.getRealPath(File.separator));
-        logger.debug("WebTrigger restcomm client: using restcomm host " + apiServerConfig.getHost() + " and port: " + apiServerConfig.getPort());
+        //RestcommConfig apiServerConfig = configuration.getRgetApiServerConfig(servletContext.getRealPath(File.separator));
+        //logger.debug("WebTrigger restcomm client: using restcomm host " + apiServerConfig.getHost() + " and port: " + apiServerConfig.getPort());
 
         // Load rvd settings
-        SettingsModel settingsModel = SettingsModel.createDefault();
-        if ( workspaceStorage.entityExists(".settings", "") )
-            settingsModel = workspaceStorage.loadEntity(".settings", "", SettingsModel.class);
+        //SettingsModel settingsModel = SettingsModel.createDefault();
+        //if ( workspaceStorage.entityExists(".settings", "") )
+        //    settingsModel = workspaceStorage.loadEntity(".settings", "", SettingsModel.class);
 
         // Setup required values depending on existing setup
-        String apiHost = settingsModel.getApiServerHost();
-        if ( RvdUtils.isEmpty(apiHost) )
-            apiHost = apiServerConfig.getHost();
+        //String apiHost = settingsModel.getApiServerHost();
+        //if ( RvdUtils.isEmpty(apiHost) )
+        //    apiHost = apiServerConfig.getHost();
 
-        Integer apiPort = settingsModel.getApiServerRestPort();
-        if ( apiPort == null )
-            apiPort = apiServerConfig.getPort();
+        //Integer apiPort = settingsModel.getApiServerRestPort();
+        //if ( apiPort == null )
+        //   apiPort = apiServerConfig.getPort();
 
-        String apiUsername = settingsModel.getApiServerUsername();
+        //String apiUsername = settingsModel.getApiServerUsername();
 
-        String apiPassword = settingsModel.getApiServerPass();
+        //String apiPassword = settingsModel.getApiServerPass();
 
         String rcmlUrl = info.lanes.get(0).startPoint.rcmlUrl;
         // try to create a valid URI from it if only the application name has been given

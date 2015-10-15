@@ -2,7 +2,7 @@ package org.mobicents.servlet.restcomm.rvd.model.client;
 
 import org.mobicents.servlet.restcomm.rvd.RvdConfiguration;
 
-public class SettingsModel {
+public class WorkspaceSettings {
 
     private String apiServerHost;
     private Integer apiServerRestPort; // null values should be allowed too
@@ -11,20 +11,20 @@ public class SettingsModel {
     private String appStoreDomain;
 
 
-    public static SettingsModel createDefault() {
-        SettingsModel settingsModel = new SettingsModel(null, null);
+    public static WorkspaceSettings createDefault() {
+        WorkspaceSettings settingsModel = new WorkspaceSettings(null, null);
         settingsModel.appStoreDomain = RvdConfiguration.DEFAULT_APPSTORE_DOMAIN;
         return settingsModel;
     }
 
-    public SettingsModel(String apiServerHost, Integer apiServerRestPort) {
+    public WorkspaceSettings(String apiServerHost, Integer apiServerRestPort) {
         super();
         this.apiServerHost = apiServerHost;
         this.apiServerRestPort = apiServerRestPort;
     }
 
 
-    public SettingsModel(String apiServerHost, Integer apiServerRestPort, String apiServerUsername, String apiServerPass) {
+    public WorkspaceSettings(String apiServerHost, Integer apiServerRestPort, String apiServerUsername, String apiServerPass) {
         super();
         this.apiServerHost = apiServerHost;
         this.apiServerRestPort = apiServerRestPort;

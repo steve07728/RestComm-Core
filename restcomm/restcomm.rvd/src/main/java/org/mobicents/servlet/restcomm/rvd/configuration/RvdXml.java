@@ -1,14 +1,14 @@
-package org.mobicents.servlet.restcomm.rvd.model;
+package org.mobicents.servlet.restcomm.rvd.configuration;
 
-public class RvdConfig {
+public class RvdXml {
     private String workspaceLocation;
     private String restcommPublicIp;
     private String sslMode;
 
-    public RvdConfig() {
+    public RvdXml() {
     }
 
-    public RvdConfig(String workspaceLocation, String restcommPublicIp, String sslMode) {
+    public RvdXml(String workspaceLocation, String restcommPublicIp, String sslMode) {
         super();
         this.workspaceLocation = workspaceLocation;
         this.restcommPublicIp = restcommPublicIp;

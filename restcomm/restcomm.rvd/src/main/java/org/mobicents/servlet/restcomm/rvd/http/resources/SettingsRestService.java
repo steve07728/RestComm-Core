@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 import org.mobicents.servlet.restcomm.rvd.RvdConfiguration;
 import org.mobicents.servlet.restcomm.rvd.http.RestService;
 import org.mobicents.servlet.restcomm.rvd.model.ModelMarshaler;
-import org.mobicents.servlet.restcomm.rvd.model.client.SettingsModel;
+import org.mobicents.servlet.restcomm.rvd.model.client.WorkspaceSettings;
 import org.mobicents.servlet.restcomm.rvd.security.annotations.RvdAuth;
 import org.mobicents.servlet.restcomm.rvd.storage.WorkspaceStorage;
 
@@ -58,7 +58,7 @@ public class SettingsRestService extends RestService {
             // Create a settings model from the request
             String data;
             data = IOUtils.toString(request.getInputStream(), Charset.forName("UTF-8"));
-            SettingsModel settingsModel = marshaler.toModel(data, SettingsModel.class);
+            WorkspaceSettings settingsModel = marshaler.toModel(data, WorkspaceSettings.class);
 
             // Store the model to a .settings file in the root of the workspace
             File settingsFile = new File(settings.getWorkspaceBasePath() + "/.settings");
