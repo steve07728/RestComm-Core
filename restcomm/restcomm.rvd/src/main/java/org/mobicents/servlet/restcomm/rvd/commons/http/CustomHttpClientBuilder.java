@@ -4,16 +4,18 @@ package org.mobicents.servlet.restcomm.rvd.commons.http;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
 
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
 import org.mobicents.servlet.restcomm.rvd.RvdConfiguration;
 
 
@@ -54,8 +56,15 @@ public class CustomHttpClientBuilder {
         String[] protocols = getSSLPrototocolsFromSystemProperties();
         //SSLContext sslcontext = SSLContexts.createDefault();
         SSLContext sslcontext;
+        TrustStrategy allowAllstrategy = new TrustStrategy() {
+            @Override
+            public boolean isTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                return true;
+            }
+        };
+
         try {
-            sslcontext = SSLContexts.custom().loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
+            sslcontext = SSLContexts.custom().loadTrustMaterial(null, allowAllstrategy).build();
         } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
             throw new RuntimeException(e);
         }
