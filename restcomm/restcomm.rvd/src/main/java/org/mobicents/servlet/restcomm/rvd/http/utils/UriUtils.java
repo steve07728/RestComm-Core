@@ -167,4 +167,29 @@ public final class UriUtils {
         }
         return httpConnectorList;
     }
+
+    /**
+     * Builds a server-relative url based on an application-relative url.
+     *
+     * i.e.
+     *  For
+     *      url = controller and appName = fooApp
+     *  returns
+     *      /restcomm-rvd/services/apps/fooApp/controller
+     *
+     * @param url
+     * @param appName
+     * @return
+     */
+    public static String rebaseApplicationRelativeUrl(String url, String appName ) {
+        StringBuffer sb = new StringBuffer("/");
+        sb.append(RvdConfiguration.RVD_CONTEXT);
+        sb.append("/");
+        sb.append(RvdConfiguration.REST_SERVICES_PATH);
+        sb.append("/apps/");
+        sb.append(appName);
+        sb.append("/");
+        sb.append(url);
+        return sb.toString();
+    }
 }

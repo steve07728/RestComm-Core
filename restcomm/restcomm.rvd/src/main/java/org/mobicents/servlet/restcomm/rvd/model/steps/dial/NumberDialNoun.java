@@ -3,6 +3,7 @@ package org.mobicents.servlet.restcomm.rvd.model.steps.dial;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.mobicents.servlet.restcomm.rvd.http.utils.UriUtils;
 import org.mobicents.servlet.restcomm.rvd.utils.RvdUtils;
 import org.mobicents.servlet.restcomm.rvd.exceptions.InterpreterException;
 import org.mobicents.servlet.restcomm.rvd.interpreter.Interpreter;
@@ -37,7 +38,7 @@ public class NumberDialNoun extends DialNoun {
         if ( ! RvdUtils.isEmpty(getBeforeConnectModule()) ) {
             Map<String, String> pairs = new HashMap<String, String>();
             pairs.put("target", getBeforeConnectModule());
-            rcmlNoun.setUrl( interpreter.buildAction(pairs) );
+            rcmlNoun.setUrl( UriUtils.rebaseApplicationRelativeUrl(interpreter.buildAction(pairs),RvdUtils.myUrlEncode(interpreter.getAppName())));
         }
 
         rcmlNoun.setSendDigits( getSendDigits() );
