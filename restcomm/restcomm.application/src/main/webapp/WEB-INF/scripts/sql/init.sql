@@ -262,3 +262,30 @@ CREATE TABLE "restcomm_gateways" (
 "ttl" INT NOT NULL,
 "uri" LONGVARCHAR NOT NULL
 );
+
+CREATE TABLE "restcomm_geolocation" (
+"sid" VARCHAR(34) NOT NULL PRIMARY KEY,
+"date_created" DATETIME NOT NULL,
+"date_updated" DATETIME NOT NULL,
+"date_executed" DATETIME NOT NULL,
+"account_sid" VARCHAR(34) NOT NULL,
+"source" VARCHAR(30) NOT NULL,
+"global_cell_id" VARCHAR(10),
+"location_area_id" VARCHAR(10),
+"age_of_location_info" INT,
+"mobile_country_code" INT,
+"mobile_network_code" INT,
+"network_entity_address" BIGINT,
+"device_latitude" VARCHAR(15),
+"device_longitude" VARCHAR(15),
+"physical_address" VARCHAR(30),
+"internet_address" VARCHAR(36), 
+"radius" BIGINT, 
+"interval" BIGINT, 
+"occurrence" VARCHAR(500),
+"geo_location_type" VARCHAR(15), 
+"geo_location_response_time" BIGINT, 
+"status" VARCHAR(30), 
+"api_version" VARCHAR(10) NOT NULL,
+"uri" LONGVARCHAR NOT NULL
+);
