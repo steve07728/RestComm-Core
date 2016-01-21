@@ -20,15 +20,16 @@
 package org.mobicents.servlet.restcomm.dao;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URI;
 import java.util.Currency;
 import java.util.Date;
 
 import org.joda.time.DateTime;
+import org.mobicents.servlet.restcomm.annotations.concurrency.ThreadSafe;
 import org.mobicents.servlet.restcomm.entities.Account;
 import org.mobicents.servlet.restcomm.entities.Application;
 import org.mobicents.servlet.restcomm.entities.Sid;
-import org.mobicents.servlet.restcomm.annotations.concurrency.ThreadSafe;
 
 /**
  * @author quintana.thomas@gmail.com (Thomas Quintana)
@@ -58,6 +59,14 @@ public final class DaoUtils {
     public static BigDecimal readBigDecimal(final Object object) {
         if (object != null) {
             return new BigDecimal((String) object);
+        } else {
+            return null;
+        }
+    }
+    
+    public static BigInteger readBigInteger(final Object object) {
+        if (object != null) {
+            return new BigInteger((String) object);
         } else {
             return null;
         }

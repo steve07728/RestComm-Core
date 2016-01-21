@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-        
+
 package org.mobicents.servlet.restcomm.entities;
 
 import java.math.BigInteger;
@@ -29,17 +29,18 @@ import org.joda.time.DateTime;
 import org.mobicents.servlet.restcomm.annotations.concurrency.NotThreadSafe;
 
 /**
- * @author Fernando
+ * @author Fernando Mendioroz
  *
  */
 public class Geolocation {
-    
+
     private final Sid sid;
     private final DateTime dateCreated;
     private final DateTime dateUpdated;
     private final DateTime dateExecuted;
     private final Sid accountSid;
     private final String source;
+    private final String deviceIdentifier;
     private final String globalCellId;
     private final String locationAreaId;
     private final Integer ageOfLocationInfo;
@@ -58,12 +59,13 @@ public class Geolocation {
     private final String status;
     private final String apiVersion;
     private final URI uri;
-    
+
     public Geolocation(Sid sid, DateTime dateCreated, DateTime dateUpdated, DateTime dateExecuted, Sid accountSid,
-            String source, String globalCellId, String locationAreaId, Integer ageOfLocationInfo, Integer mobileCountryCode,
-            Integer mobileNetworkCode, BigInteger networkEntityAddress, String deviceLatitude, String deviceLongitude,
-            String physicalAddress, String internetAddress, BigInteger radius, BigInteger interval, String occurrence,
-            String geoLocationType, BigInteger geoLocationResponseTime, String status, String apiVersion, URI uri) {
+            String source, String deviceIdentifier, String globalCellId, String locationAreaId, Integer ageOfLocationInfo,
+            Integer mobileCountryCode, Integer mobileNetworkCode, BigInteger networkEntityAddress, String deviceLatitude,
+            String deviceLongitude, String physicalAddress, String internetAddress, BigInteger radius, BigInteger interval,
+            String occurrence, String geoLocationType, BigInteger geoLocationResponseTime, String status, String apiVersion,
+            URI uri) {
         super();
         this.sid = sid;
         this.dateCreated = dateCreated;
@@ -71,6 +73,7 @@ public class Geolocation {
         this.dateExecuted = dateExecuted;
         this.accountSid = accountSid;
         this.source = source;
+        this.deviceIdentifier = deviceIdentifier;
         this.globalCellId = globalCellId;
         this.locationAreaId = locationAreaId;
         this.ageOfLocationInfo = ageOfLocationInfo;
@@ -113,6 +116,10 @@ public class Geolocation {
 
     public String getSource() {
         return source;
+    }
+
+    public String getDeviceIdentifier() {
+        return deviceIdentifier;
     }
 
     public String getGlobalCellId() {
@@ -186,209 +193,184 @@ public class Geolocation {
     public URI getUri() {
         return uri;
     }
-    
+
     public Geolocation setSid(Sid sid) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setDateCreated(DateTime dateCreated) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setDateUpdated(DateTime dateUpdated) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setDateExecuted(DateTime dateExecuted) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setAccountSid(Sid accountSid) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setSource(String source) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setGlobalCellId(String globalCellId) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setLocationAreaId(String locationAreaId) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setAgeOfLocationInfo(Integer ageOfLocationInfo) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setMobileCountryCode(Integer mobileCountryCode) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setMobileNetworkCode(Integer mobileNetworkCode) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setNetworkEntityAddress(BigInteger networkEntityAddress) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setDeviceLatitude(String deviceLatitude) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setDeviceLongitude(String deviceLongitude) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setPhysicalAddress(String physicalAddress) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setInternetAddress(String internetAddress) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setRadius(BigInteger radius) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setInterval(BigInteger interval) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setOccurrence(String occurrence) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setGeoLocationType(String geoLocationType) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setGeoLocationResponseTime(BigInteger geoLocationResponseTime) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setStatus(String status) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setApiVersion(String apiVersion) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
 
     public Geolocation setUri(URI uri) {
-        return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
     }
-
 
     @NotThreadSafe
     public static final class Builder {
-        
+
         private Sid sid;
-        private DateTime dateCreated;
         private DateTime dateUpdated;
         private DateTime dateExecuted;
         private Sid accountSid;
         private String source;
+        private String deviceIdentifier;
         private String globalCellId;
         private String locationAreaId;
         private Integer ageOfLocationInfo;
@@ -407,26 +389,21 @@ public class Geolocation {
         private String status;
         private String apiVersion;
         private URI uri;
-        
+
         private Builder() {
             super();
         }
-        
+
         public Geolocation build() {
             final DateTime now = DateTime.now();
-            return new Geolocation(sid,  dateCreated,  dateUpdated,  dateExecuted,  accountSid,
-                    source,  globalCellId,  locationAreaId,  ageOfLocationInfo,  mobileCountryCode,
-                    mobileNetworkCode,  networkEntityAddress,  deviceLatitude,  deviceLongitude,
-                    physicalAddress,  internetAddress,  radius,  interval,  occurrence,
-                    geoLocationType,  geoLocationResponseTime,  status,  apiVersion,  uri);
+            return new Geolocation(sid, now, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier,
+                    globalCellId, locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress,
+                    deviceLatitude, deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence,
+                    geoLocationType, geoLocationResponseTime, status, apiVersion, uri);
         }
 
         public void setSid(Sid sid) {
             this.sid = sid;
-        }
-
-        public void setDateCreated(DateTime dateCreated) {
-            this.dateCreated = dateCreated;
         }
 
         public void setDateUpdated(DateTime dateUpdated) {
@@ -443,6 +420,10 @@ public class Geolocation {
 
         public void setSource(String source) {
             this.source = source;
+        }
+
+        public void setDeviceIdentifier(String deviceIdentifier) {
+            this.deviceIdentifier = deviceIdentifier;
         }
 
         public void setGlobalCellId(String globalCellId) {
@@ -516,8 +497,6 @@ public class Geolocation {
         public void setUri(URI uri) {
             this.uri = uri;
         }
-        
-        
+
     }
 }
-
