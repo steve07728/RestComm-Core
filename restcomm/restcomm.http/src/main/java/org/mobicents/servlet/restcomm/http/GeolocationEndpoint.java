@@ -22,10 +22,63 @@
         
 package org.mobicents.servlet.restcomm.http;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
+
+import org.apache.commons.configuration.Configuration;
+import org.mobicents.servlet.restcomm.annotations.concurrency.NotThreadSafe;
+import org.mobicents.servlet.restcomm.dao.AccountsDao;
+import org.mobicents.servlet.restcomm.dao.DaoManager;
+import org.mobicents.servlet.restcomm.dao.GeolocationDao;
+import org.mobicents.servlet.restcomm.entities.Geolocation;
+import org.mobicents.servlet.restcomm.entities.RestCommResponse;
+import org.mobicents.servlet.restcomm.http.converter.ClientListConverter;
+import org.mobicents.servlet.restcomm.http.converter.GeolocationConverter;
+import org.mobicents.servlet.restcomm.http.converter.RestCommResponseConverter;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thoughtworks.xstream.XStream;
+
 /**
- * @author Fernando
+ * @author fernando.mendioroz@telestax.com (Fernando Mendioroz)
  *
  */
-public class GeolocationEndpoint {
+@NotThreadSafe
+public abstract class GeolocationEndpoint extends AbstractEndpoint{
+    
+    @Context
+    protected ServletContext context;
+    protected Configuration configuration;
+    protected GeolocationDao dao;
+    protected Gson gson;
+    protected XStream xstream;
+    protected AccountsDao accountsDao;
+
+    public GeolocationEndpoint() {
+        super();
+    }
+    
+    @PostConstruct
+    public void init() {
+        final DaoManager storage = (DaoManager) context.getAttribute(DaoManager.class.getName());
+        dao = storage.getGeolocationDao();
+        accountsDao = storage.getAccountsDao();
+        configuration = (Configuration) context.getAttribute(Configuration.class.getName());
+        configuration = configuration.subset("runtime-settings");
+        super.init(configuration);
+        final GeolocationConverter converter = new GeolocationConverter(configuration);
+        final GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Geolocation.class, converter);
+        builder.setPrettyPrinting();
+        gson = builder.create();
+        xstream = new XStream();
+        xstream.alias("RestcommResponse", RestCommResponse.class);
+        xstream.registerConverter(converter);
+        xstream.registerConverter(new ClientListConverter(configuration));
+        xstream.registerConverter(new RestCommResponseConverter(configuration));
+    }
+    
 
 }
