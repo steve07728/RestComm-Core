@@ -63,7 +63,7 @@ public final class DaoUtils {
             return null;
         }
     }
-    
+
     public static BigInteger readBigInteger(final Object object) {
         if (object != null) {
             return new BigInteger((String) object);

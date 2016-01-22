@@ -2,7 +2,7 @@
 /*
  * TeleStax, Open Source Cloud Communications
  * Copyright 2011-2016, Telestax Inc and individual contributors
- * by the @authors tag. 
+ * by the @authors tag.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-        
+
 package org.mobicents.servlet.restcomm.http.converter;
 
 import java.lang.reflect.Type;
@@ -42,12 +42,12 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
  * @author fernando.mendioroz@telestax.com (Fernando Mendioroz)
  *
  */
-public class GeolocationConverter extends AbstractConverter implements JsonSerializer<Geolocation>{
-    
+public class GeolocationConverter extends AbstractConverter implements JsonSerializer<Geolocation> {
+
     public GeolocationConverter(final Configuration configuration) {
         super(configuration);
     }
-    
+
     @SuppressWarnings("rawtypes")
     @Override
     public boolean canConvert(final Class klass) {
@@ -56,7 +56,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
 
     @Override
     public void marshal(final Object object, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-        final Geolocation geolocation =(Geolocation) object;
+        final Geolocation geolocation = (Geolocation) object;
         writer.startNode("GeoLocation");
         writeSid(geolocation.getSid(), writer);
         writeDateCreated(geolocation.getDateCreated(), writer);
@@ -86,7 +86,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
         writer.endNode();
 
     }
-    
+
     @Override
     public JsonElement serialize(final Geolocation geolocation, final Type type, final JsonSerializationContext context) {
         final JsonObject object = new JsonObject();
@@ -117,7 +117,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
         writeUri(geolocation.getUri(), object);
         return object;
     }
-    
+
     protected void writeDateExecuted(final DateTime dateExecuted, final HierarchicalStreamWriter writer) {
         writer.startNode("DateExecuted");
         writer.setValue(new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US).format(dateExecuted.toDate()));
@@ -125,10 +125,10 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     }
 
     protected void writeDateExecuted(final DateTime dateExecuted, final JsonObject object) {
-        object.addProperty("DateExecuted", 
+        object.addProperty("DateExecuted",
                 new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US).format(dateExecuted.toDate()));
     }
-    
+
     protected void writeSource(final String source, final HierarchicalStreamWriter writer) {
         writer.startNode("Source");
         writer.setValue(source);
@@ -138,7 +138,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeSource(final String source, final JsonObject object) {
         object.addProperty("login", source);
     }
-    
+
     protected void writeDeviceIdentifier(final String deviceIdentifier, final HierarchicalStreamWriter writer) {
         writer.startNode("DeviceIdentifier");
         writer.setValue(deviceIdentifier);
@@ -148,7 +148,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeDeviceIdentifier(final String deviceIdentifier, final JsonObject object) {
         object.addProperty("DeviceIdentifier", deviceIdentifier);
     }
-    
+
     protected void writeGlobalCellId(final String globalCellId, final HierarchicalStreamWriter writer) {
         writer.startNode("GlobalCellId");
         writer.setValue(globalCellId);
@@ -158,7 +158,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeGlobalCellId(final String globalCellId, final JsonObject object) {
         object.addProperty("GlobalCellId", globalCellId);
     }
-    
+
     protected void writeLocationAreaId(final String locationAreaId, final HierarchicalStreamWriter writer) {
         writer.startNode("LocationAreaId");
         writer.setValue(locationAreaId);
@@ -168,7 +168,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeLocationAreaId(final String locationAreaId, final JsonObject object) {
         object.addProperty("LocationAreaId", locationAreaId);
     }
-    
+
     protected void writeAgeOfLocationInfo(final Integer ageOfLocationInfo, final HierarchicalStreamWriter writer) {
         writer.startNode("AgeOfLocationInfo");
         writer.setValue(ageOfLocationInfo.toString());
@@ -178,8 +178,8 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeAgeOfLocationInfo(final Integer ageOfLocationInfo, final JsonObject object) {
         object.addProperty("AgeOfLocationInfo", ageOfLocationInfo);
     }
-    
-    protected void writeMobileCountryCode(final Integer mobileCountryCode , final HierarchicalStreamWriter writer) {
+
+    protected void writeMobileCountryCode(final Integer mobileCountryCode, final HierarchicalStreamWriter writer) {
         writer.startNode("MobileCountryCode");
         writer.setValue(mobileCountryCode.toString());
         writer.endNode();
@@ -188,7 +188,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeMobileCountryCode(final Integer mobileCountryCode, final JsonObject object) {
         object.addProperty("MobileCountryCode", mobileCountryCode);
     }
-    
+
     protected void writeMobileNetworkCode(final Integer mobileNetworkCode, final HierarchicalStreamWriter writer) {
         writer.startNode("MobileNetworkCode");
         writer.setValue(mobileNetworkCode.toString());
@@ -198,7 +198,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeMobileNetworkCode(final Integer mobileNetworkCode, final JsonObject object) {
         object.addProperty("MobileNetworkCode", mobileNetworkCode);
     }
-    
+
     protected void writeNetworkEntityAddress(final BigInteger networkEntityAddress, final HierarchicalStreamWriter writer) {
         writer.startNode("NetworkEntityAddress");
         writer.setValue(networkEntityAddress.toString());
@@ -208,8 +208,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeNetworkEntityAddress(final BigInteger networkEntityAddress, final JsonObject object) {
         object.addProperty("NetworkEntityAddress", networkEntityAddress);
     }
-    
-    
+
     protected void writeDeviceLatitude(final String deviceLatitude, final HierarchicalStreamWriter writer) {
         writer.startNode("DeviceLatitude");
         writer.setValue(deviceLatitude);
@@ -219,9 +218,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeDeviceLatitude(final String deviceLatitude, final JsonObject object) {
         object.addProperty("DeviceLatitude", deviceLatitude);
     }
-    
-    
-    
+
     protected void writeDeviceLongitude(final String deviceLongitude, final HierarchicalStreamWriter writer) {
         writer.startNode("DeviceLongitude");
         writer.setValue(deviceLongitude);
@@ -231,7 +228,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeDeviceLongitude(final String deviceLongitude, final JsonObject object) {
         object.addProperty("DeviceLongitude", deviceLongitude);
     }
-    
+
     protected void writePhysicalAddress(final String physicalAddress, final HierarchicalStreamWriter writer) {
         writer.startNode("PhysicalAddress");
         writer.setValue(physicalAddress);
@@ -241,7 +238,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writePhysicalAddress(final String physicalAddress, final JsonObject object) {
         object.addProperty("PhysicalAddress", physicalAddress);
     }
-    
+
     protected void writeInternetAddress(final String internetAddress, final HierarchicalStreamWriter writer) {
         writer.startNode("InternetAddress");
         writer.setValue(internetAddress);
@@ -251,7 +248,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeInternetAddress(final String internetAddress, final JsonObject object) {
         object.addProperty("InternetAddress", internetAddress);
     }
-    
+
     protected void writeRadius(final BigInteger radius, final HierarchicalStreamWriter writer) {
         writer.startNode("Radius");
         writer.setValue(radius.toString());
@@ -261,7 +258,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeRadius(final BigInteger radius, final JsonObject object) {
         object.addProperty("Radius", radius);
     }
-    
+
     protected void writeInterval(final BigInteger interval, final HierarchicalStreamWriter writer) {
         writer.startNode("Interval");
         writer.setValue(interval.toString());
@@ -271,7 +268,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeInterval(final BigInteger interval, final JsonObject object) {
         object.addProperty("Interval", interval);
     }
-    
+
     protected void writeOccurrence(final String occurrence, final HierarchicalStreamWriter writer) {
         writer.startNode("Occurrence");
         writer.setValue(occurrence);
@@ -281,7 +278,7 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeOccurrence(final String occurrence, final JsonObject object) {
         object.addProperty("Occurrence", occurrence);
     }
-    
+
     protected void writeGeoLocationType(final String geoLocationType, final HierarchicalStreamWriter writer) {
         writer.startNode("GeoLocationType");
         writer.setValue(geoLocationType);
@@ -291,8 +288,9 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeGeoLocationType(final String geoLocationType, final JsonObject object) {
         object.addProperty("GeoLocationType", geoLocationType);
     }
-    
-    protected void writeGeoLocationResponseTime(final BigInteger geoLocationResponseTime, final HierarchicalStreamWriter writer) {
+
+    protected void writeGeoLocationResponseTime(final BigInteger geoLocationResponseTime,
+            final HierarchicalStreamWriter writer) {
         writer.startNode("GeoLocationResponseTime");
         writer.setValue(geoLocationResponseTime.toString());
         writer.endNode();
@@ -301,5 +299,5 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     protected void writeGeoLocationResponseTime(final BigInteger geoLocationResponseTime, final JsonObject object) {
         object.addProperty("GeoLocationResponseTime", geoLocationResponseTime);
     }
-    
+
 }

@@ -179,7 +179,7 @@ public final class MybatisDaoManager implements DaoManager {
     public InstanceIdDao getInstanceIdDao() {
         return instanceIdDao;
     }
-    
+
     @Override
     public GeolocationDao getGeolocationDao() {
         return geolocationDao;

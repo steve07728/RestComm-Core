@@ -283,7 +283,7 @@ CREATE TABLE "restcomm_geolocation" (
 "radius" BIGINT, 
 "interval" BIGINT, 
 "occurrence" VARCHAR(500),
-"geo_location_type" VARCHAR(15), 
+"geo_location_type" VARCHAR(15) NOT NULL, 
 "geo_location_response_time" BIGINT, 
 "status" VARCHAR(30), 
 "api_version" VARCHAR(10) NOT NULL,

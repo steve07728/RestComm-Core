@@ -2,7 +2,7 @@
 /*
  * TeleStax, Open Source Cloud Communications
  * Copyright 2011-2016, Telestax Inc and individual contributors
- * by the @authors tag. 
+ * by the @authors tag.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -236,6 +236,13 @@ public class Geolocation {
                 geoLocationResponseTime, status, apiVersion, uri);
     }
 
+    public Geolocation setDeviceIdentifier(String deviceIdentifier) {
+        return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
+                locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                geoLocationResponseTime, status, apiVersion, uri);
+    }
+
     public Geolocation setGlobalCellId(String globalCellId) {
         return new Geolocation(sid, dateCreated, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier, globalCellId,
                 locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
@@ -362,12 +369,14 @@ public class Geolocation {
                 geoLocationResponseTime, status, apiVersion, uri);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     @NotThreadSafe
     public static final class Builder {
 
         private Sid sid;
-        private DateTime dateUpdated;
-        private DateTime dateExecuted;
         private Sid accountSid;
         private String source;
         private String deviceIdentifier;
@@ -396,22 +405,14 @@ public class Geolocation {
 
         public Geolocation build() {
             final DateTime now = DateTime.now();
-            return new Geolocation(sid, now, dateUpdated, dateExecuted, accountSid, source, deviceIdentifier,
-                    globalCellId, locationAreaId, ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress,
-                    deviceLatitude, deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence,
-                    geoLocationType, geoLocationResponseTime, status, apiVersion, uri);
+            return new Geolocation(sid, now, now, now, accountSid, source, deviceIdentifier, globalCellId, locationAreaId,
+                    ageOfLocationInfo, mobileCountryCode, mobileNetworkCode, networkEntityAddress, deviceLatitude,
+                    deviceLongitude, physicalAddress, internetAddress, radius, interval, occurrence, geoLocationType,
+                    geoLocationResponseTime, status, apiVersion, uri);
         }
 
         public void setSid(Sid sid) {
             this.sid = sid;
-        }
-
-        public void setDateUpdated(DateTime dateUpdated) {
-            this.dateUpdated = dateUpdated;
-        }
-
-        public void setDateExecuted(DateTime dateExecuted) {
-            this.dateExecuted = dateExecuted;
         }
 
         public void setAccountSid(Sid accountSid) {

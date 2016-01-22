@@ -2,7 +2,7 @@
 /*
  * TeleStax, Open Source Cloud Communications
  * Copyright 2011-2016, Telestax Inc and individual contributors
- * by the @authors tag. 
+ * by the @authors tag.
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -19,10 +19,18 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-        
+
 package org.mobicents.servlet.restcomm.dao.mybatis;
 
-import static org.mobicents.servlet.restcomm.dao.DaoUtils.*;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readBigInteger;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readDateTime;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readInteger;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readSid;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readString;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.readUri;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.writeDateTime;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.writeSid;
+import static org.mobicents.servlet.restcomm.dao.DaoUtils.writeUri;
 
 import java.math.BigInteger;
 import java.net.URI;
@@ -35,7 +43,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.joda.time.DateTime;
 import org.mobicents.servlet.restcomm.dao.GeolocationDao;
-import org.mobicents.servlet.restcomm.entities.Client;
 import org.mobicents.servlet.restcomm.entities.Geolocation;
 import org.mobicents.servlet.restcomm.entities.Sid;
 
@@ -43,8 +50,8 @@ import org.mobicents.servlet.restcomm.entities.Sid;
  * @author Fernando Mendioroz
  *
  */
-public class MybatisGeolocationDao implements GeolocationDao{
-    
+public class MybatisGeolocationDao implements GeolocationDao {
+
     private static final String namespace = "org.mobicents.servlet.sip.restcomm.dao.GeolocationDao.";
     private final SqlSessionFactory sessions;
 
@@ -52,7 +59,7 @@ public class MybatisGeolocationDao implements GeolocationDao{
         super();
         this.sessions = sessions;
     }
-    
+
     @Override
     public void addGeolocation(Geolocation gl) {
         final SqlSession session = sessions.openSession();
@@ -62,14 +69,14 @@ public class MybatisGeolocationDao implements GeolocationDao{
         } finally {
             session.close();
         }
-        
-    }    
+
+    }
 
     @Override
     public Geolocation getGeolocation(Sid sid) {
         return getGeolocation(namespace + "getGeolocation", sid.toString());
     }
-    
+
     private Geolocation getGeolocation(final String selector, final String parameter) {
         final SqlSession session = sessions.openSession();
         try {
@@ -104,9 +111,9 @@ public class MybatisGeolocationDao implements GeolocationDao{
     @Override
     public void removeGeolocation(Sid sid) {
         removeGeolocations(namespace + "removeGeolocation", sid);
-        
+
     }
-    
+
     @Override
     public void removeGeolocations(final Sid accountSid) {
         removeGeolocations(namespace + "removeGeolocations", accountSid);
@@ -131,9 +138,9 @@ public class MybatisGeolocationDao implements GeolocationDao{
         } finally {
             session.close();
         }
-        
+
     }
-    
+
     private Map<String, Object> toMap(Geolocation gl) {
         final Map<String, Object> map = new HashMap<String, Object>();
         map.put("sid", writeSid(gl.getSid()));
@@ -160,10 +167,10 @@ public class MybatisGeolocationDao implements GeolocationDao{
         map.put("geo_location_response_time", gl.getGeoLocationResponseTime());
         map.put("status", gl.getStatus());
         map.put("api_version", gl.getApiVersion());
-        map.put("uri", writeUri(gl.getUri()));        
+        map.put("uri", writeUri(gl.getUri()));
         return map;
     }
-    
+
     private Geolocation toGeolocation(final Map<String, Object> map) {
         final Sid sid = readSid(map.get("sid"));
         final DateTime date_created = readDateTime(map.get("date_created"));
@@ -190,10 +197,10 @@ public class MybatisGeolocationDao implements GeolocationDao{
         final String status = readString(map.get("status"));
         final String api_version = readString(map.get("api_version"));
         final URI uri = readUri(map.get("uri"));
-        return new Geolocation(sid, date_created, date_updated, date_executed, account_sid, source, device_identifier, global_cell_id,
-                location_area_id, age_of_location_info, mobile_country_code, mobile_network_code, network_entity_address, device_latitude,
-                device_longitude, physical_address, internet_address, radius, interval, occurrence, geo_location_type,
-                geo_location_response_time, status, api_version, uri);
+        return new Geolocation(sid, date_created, date_updated, date_executed, account_sid, source, device_identifier,
+                global_cell_id, location_area_id, age_of_location_info, mobile_country_code, mobile_network_code,
+                network_entity_address, device_latitude, device_longitude, physical_address, internet_address, radius, interval,
+                occurrence, geo_location_type, geo_location_response_time, status, api_version, uri);
     }
 
 }

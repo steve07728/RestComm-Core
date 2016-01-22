@@ -20,29 +20,26 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.mobicents.servlet.restcomm.dao;
+package org.mobicents.servlet.restcomm.entities;
 
 import java.util.List;
 
-import org.mobicents.servlet.restcomm.entities.Geolocation;
-import org.mobicents.servlet.restcomm.entities.Sid;
+import org.mobicents.servlet.restcomm.annotations.concurrency.NotThreadSafe;
 
 /**
- * @author Fernando Mendioroz
+ * @author fernando.mendioroz@telestax.com (Fernando Mendioroz)
  *
  */
-public interface GeolocationDao {
+@NotThreadSafe
+public final class GeolocationList {
+    private final List<Geolocation> geolocations;
 
-    void addGeolocation(Geolocation gl);
+    public GeolocationList(final List<Geolocation> geolocations) {
+        super();
+        this.geolocations = geolocations;
+    }
 
-    Geolocation getGeolocation(Sid sid);
-
-    List<Geolocation> getGeolocations(Sid sid);
-
-    void removeGeolocation(Sid sid);
-
-    void removeGeolocations(Sid sid);
-
-    void updateGeolocation(Geolocation gl);
-
+    public List<Geolocation> getGeolocations() {
+        return geolocations;
+    }
 }
