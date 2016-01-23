@@ -225,7 +225,7 @@ public abstract class GeolocationEndpoint extends AbstractEndpoint {
         } catch (final AuthorizationException exception) {
             return status(UNAUTHORIZED).build();
         }
-        final Geolocation geolocation = dao.getGeolocation(new Sid(sid));
+        Geolocation geolocation = dao.getGeolocation(new Sid(sid));
         if (geolocation == null) {
             return status(NOT_FOUND).build();
         } else {
@@ -234,7 +234,8 @@ public abstract class GeolocationEndpoint extends AbstractEndpoint {
             } catch (final AuthorizationException exception) {
                 return status(UNAUTHORIZED).build();
             }
-            dao.updateGeolocation(update(geolocation, data));
+            geolocation = update(geolocation, data);
+            dao.updateGeolocation(geolocation);
             if (APPLICATION_XML_TYPE == responseType) {
                 final RestCommResponse response = new RestCommResponse(geolocation);
                 return ok(xstream.toXML(response), APPLICATION_XML).build();
