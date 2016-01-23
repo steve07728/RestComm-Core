@@ -32,6 +32,7 @@ import org.joda.time.DateTime;
 import org.mobicents.servlet.restcomm.entities.Geolocation;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
@@ -125,179 +126,297 @@ public class GeolocationConverter extends AbstractConverter implements JsonSeria
     }
 
     protected void writeDateExecuted(final DateTime dateExecuted, final JsonObject object) {
-        object.addProperty("DateExecuted",
+        object.addProperty("date_executed",
                 new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.US).format(dateExecuted.toDate()));
     }
 
     protected void writeSource(final String source, final HierarchicalStreamWriter writer) {
-        writer.startNode("Source");
-        writer.setValue(source);
-        writer.endNode();
+        if (source != null) {
+            writer.startNode("Source");
+            writer.setValue(source);
+            writer.endNode();
+        }
     }
 
     protected void writeSource(final String source, final JsonObject object) {
-        object.addProperty("login", source);
+        if (source != null) {
+            object.addProperty("source", source);
+        } else {
+            object.add("source", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeDeviceIdentifier(final String deviceIdentifier, final HierarchicalStreamWriter writer) {
-        writer.startNode("DeviceIdentifier");
-        writer.setValue(deviceIdentifier);
-        writer.endNode();
+        if (deviceIdentifier != null) {
+            writer.startNode("DeviceIdentifier");
+            writer.setValue(deviceIdentifier);
+            writer.endNode();
+        }
     }
 
     protected void writeDeviceIdentifier(final String deviceIdentifier, final JsonObject object) {
-        object.addProperty("DeviceIdentifier", deviceIdentifier);
+        if (deviceIdentifier != null) {
+            object.addProperty("device_identifier", deviceIdentifier);
+        } else {
+            object.add("device_identifier", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeGlobalCellId(final String globalCellId, final HierarchicalStreamWriter writer) {
-        writer.startNode("GlobalCellId");
-        writer.setValue(globalCellId);
-        writer.endNode();
+        if (globalCellId != null) {
+            writer.startNode("GlobalCellId");
+            writer.setValue(globalCellId);
+            writer.endNode();
+        }
     }
 
     protected void writeGlobalCellId(final String globalCellId, final JsonObject object) {
-        object.addProperty("GlobalCellId", globalCellId);
+        if (globalCellId != null) {
+            object.addProperty("global_cell_id", globalCellId);
+        } else {
+            object.add("global_cell_id", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeLocationAreaId(final String locationAreaId, final HierarchicalStreamWriter writer) {
-        writer.startNode("LocationAreaId");
-        writer.setValue(locationAreaId);
-        writer.endNode();
+        if (locationAreaId != null) {
+            writer.startNode("LocationAreaId");
+            writer.setValue(locationAreaId);
+            writer.endNode();
+        }
     }
 
     protected void writeLocationAreaId(final String locationAreaId, final JsonObject object) {
-        object.addProperty("LocationAreaId", locationAreaId);
+        if (locationAreaId != null) {
+            object.addProperty("location_area_id", locationAreaId);
+        } else {
+            object.add("location_area_id", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeAgeOfLocationInfo(final Integer ageOfLocationInfo, final HierarchicalStreamWriter writer) {
-        writer.startNode("AgeOfLocationInfo");
-        writer.setValue(ageOfLocationInfo.toString());
-        writer.endNode();
+        if (ageOfLocationInfo != null) {
+            writer.startNode("AgeOfLocationInfo");
+            writer.setValue(ageOfLocationInfo.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeAgeOfLocationInfo(final Integer ageOfLocationInfo, final JsonObject object) {
-        object.addProperty("AgeOfLocationInfo", ageOfLocationInfo);
+        if (ageOfLocationInfo != null) {
+            object.addProperty("age_of_location_info", ageOfLocationInfo);
+        } else {
+            object.add("age_of_location_info", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeMobileCountryCode(final Integer mobileCountryCode, final HierarchicalStreamWriter writer) {
-        writer.startNode("MobileCountryCode");
-        writer.setValue(mobileCountryCode.toString());
-        writer.endNode();
+        if (mobileCountryCode != null) {
+            writer.startNode("MobileCountryCode");
+            writer.setValue(mobileCountryCode.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeMobileCountryCode(final Integer mobileCountryCode, final JsonObject object) {
-        object.addProperty("MobileCountryCode", mobileCountryCode);
+        if (mobileCountryCode != null) {
+            object.addProperty("mobile_country_code", mobileCountryCode);
+        } else {
+            object.add("mobile_country_code", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeMobileNetworkCode(final Integer mobileNetworkCode, final HierarchicalStreamWriter writer) {
-        writer.startNode("MobileNetworkCode");
-        writer.setValue(mobileNetworkCode.toString());
-        writer.endNode();
+        if (mobileNetworkCode != null) {
+            writer.startNode("MobileNetworkCode");
+            writer.setValue(mobileNetworkCode.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeMobileNetworkCode(final Integer mobileNetworkCode, final JsonObject object) {
-        object.addProperty("MobileNetworkCode", mobileNetworkCode);
+        if (mobileNetworkCode != null) {
+            object.addProperty("mobile_network_code", mobileNetworkCode);
+        } else {
+            object.add("mobile_network_code", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeNetworkEntityAddress(final BigInteger networkEntityAddress, final HierarchicalStreamWriter writer) {
-        writer.startNode("NetworkEntityAddress");
-        writer.setValue(networkEntityAddress.toString());
-        writer.endNode();
+        if (networkEntityAddress != null) {
+            writer.startNode("NetworkEntityAddress");
+            writer.setValue(networkEntityAddress.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeNetworkEntityAddress(final BigInteger networkEntityAddress, final JsonObject object) {
-        object.addProperty("NetworkEntityAddress", networkEntityAddress);
+        if (networkEntityAddress != null) {
+            object.addProperty("network_entity_address", networkEntityAddress);
+        } else {
+            object.add("network_entity_address", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeDeviceLatitude(final String deviceLatitude, final HierarchicalStreamWriter writer) {
-        writer.startNode("DeviceLatitude");
-        writer.setValue(deviceLatitude);
-        writer.endNode();
+        if (deviceLatitude != null) {
+            writer.startNode("DeviceLatitude");
+            writer.setValue(deviceLatitude);
+            writer.endNode();
+        }
     }
 
     protected void writeDeviceLatitude(final String deviceLatitude, final JsonObject object) {
-        object.addProperty("DeviceLatitude", deviceLatitude);
+        if (deviceLatitude != null) {
+            object.addProperty("device_latitude", deviceLatitude);
+        } else {
+            object.add("device_latitude", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeDeviceLongitude(final String deviceLongitude, final HierarchicalStreamWriter writer) {
-        writer.startNode("DeviceLongitude");
-        writer.setValue(deviceLongitude);
-        writer.endNode();
+        if (deviceLongitude != null) {
+            writer.startNode("DeviceLongitude");
+            writer.setValue(deviceLongitude);
+            writer.endNode();
+        }
     }
 
     protected void writeDeviceLongitude(final String deviceLongitude, final JsonObject object) {
-        object.addProperty("DeviceLongitude", deviceLongitude);
+        if (deviceLongitude != null) {
+            object.addProperty("device_longitude", deviceLongitude);
+        } else {
+            object.add("device_longitude", JsonNull.INSTANCE);
+        }
     }
 
     protected void writePhysicalAddress(final String physicalAddress, final HierarchicalStreamWriter writer) {
-        writer.startNode("PhysicalAddress");
-        writer.setValue(physicalAddress);
-        writer.endNode();
+        if (physicalAddress != null) {
+            writer.startNode("PhysicalAddress");
+            writer.setValue(physicalAddress);
+            writer.endNode();
+        }
     }
 
     protected void writePhysicalAddress(final String physicalAddress, final JsonObject object) {
-        object.addProperty("PhysicalAddress", physicalAddress);
+        if (physicalAddress != null) {
+            object.addProperty("physical_address", physicalAddress);
+        } else {
+            object.add("physical_address", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeInternetAddress(final String internetAddress, final HierarchicalStreamWriter writer) {
-        writer.startNode("InternetAddress");
-        writer.setValue(internetAddress);
-        writer.endNode();
+        if (internetAddress != null) {
+            writer.startNode("InternetAddress");
+            writer.setValue(internetAddress);
+            writer.endNode();
+        }
     }
 
     protected void writeInternetAddress(final String internetAddress, final JsonObject object) {
-        object.addProperty("InternetAddress", internetAddress);
+        if (internetAddress != null) {
+            object.addProperty("internet_address", internetAddress);
+        } else {
+            object.add("internet_address", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeRadius(final BigInteger radius, final HierarchicalStreamWriter writer) {
-        writer.startNode("Radius");
-        writer.setValue(radius.toString());
-        writer.endNode();
+        if (radius != null) {
+            writer.startNode("Radius");
+            writer.setValue(radius.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeRadius(final BigInteger radius, final JsonObject object) {
-        object.addProperty("Radius", radius);
+        if (radius != null) {
+            object.addProperty("radius", radius);
+        } else {
+            object.add("radius", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeInterval(final BigInteger interval, final HierarchicalStreamWriter writer) {
-        writer.startNode("Interval");
-        writer.setValue(interval.toString());
-        writer.endNode();
+        if (interval != null) {
+            writer.startNode("Interval");
+            writer.setValue(interval.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeInterval(final BigInteger interval, final JsonObject object) {
-        object.addProperty("Interval", interval);
+        if (interval != null) {
+            object.addProperty("interval", interval);
+        } else {
+            object.add("interval", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeOccurrence(final String occurrence, final HierarchicalStreamWriter writer) {
-        writer.startNode("Occurrence");
-        writer.setValue(occurrence);
-        writer.endNode();
+        if (occurrence != null) {
+            writer.startNode("Occurrence");
+            writer.setValue(occurrence);
+            writer.endNode();
+        }
     }
 
     protected void writeOccurrence(final String occurrence, final JsonObject object) {
-        object.addProperty("Occurrence", occurrence);
+        if (occurrence != null) {
+            object.addProperty("occurrence", occurrence);
+        } else {
+            object.add("occurrence", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeGeoLocationType(final String geoLocationType, final HierarchicalStreamWriter writer) {
-        writer.startNode("GeoLocationType");
-        writer.setValue(geoLocationType);
-        writer.endNode();
+        if (geoLocationType != null) {
+            writer.startNode("GeoLocationType");
+            writer.setValue(geoLocationType);
+            writer.endNode();
+        }
     }
 
     protected void writeGeoLocationType(final String geoLocationType, final JsonObject object) {
-        object.addProperty("GeoLocationType", geoLocationType);
+        if (geoLocationType != null) {
+            object.addProperty("geo_location_type", geoLocationType);
+        } else {
+            object.add("geo_location_type", JsonNull.INSTANCE);
+        }
     }
 
     protected void writeGeoLocationResponseTime(final BigInteger geoLocationResponseTime,
             final HierarchicalStreamWriter writer) {
-        writer.startNode("GeoLocationResponseTime");
-        writer.setValue(geoLocationResponseTime.toString());
-        writer.endNode();
+        if (geoLocationResponseTime != null) {
+            writer.startNode("GeoLocationResponseTime");
+            writer.setValue(geoLocationResponseTime.toString());
+            writer.endNode();
+        }
     }
 
     protected void writeGeoLocationResponseTime(final BigInteger geoLocationResponseTime, final JsonObject object) {
-        object.addProperty("GeoLocationResponseTime", geoLocationResponseTime);
+        if (geoLocationResponseTime != null) {
+            object.addProperty("geo_location_response_time", geoLocationResponseTime);
+        } else {
+            object.add("geo_location_response_time", JsonNull.INSTANCE);
+        }
+    }
+
+    protected void writeStatus(final String status, final HierarchicalStreamWriter writer) {
+        if (status != null) {
+            writer.startNode("Status");
+            writer.setValue(status);
+            writer.endNode();
+        }
+    }
+
+    protected void writeStatus(final String status, final JsonObject object) {
+        if (status != null) {
+            object.addProperty("status", status);
+        } else {
+            object.add("status", JsonNull.INSTANCE);
+        }
     }
 
 }

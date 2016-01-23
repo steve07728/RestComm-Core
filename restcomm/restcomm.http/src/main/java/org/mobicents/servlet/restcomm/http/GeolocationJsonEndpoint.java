@@ -36,7 +36,7 @@ import org.mobicents.servlet.restcomm.annotations.concurrency.ThreadSafe;
  * @author fernando.mendioroz@telestax.com (Fernando Mendioroz)
  *
  */
-@Path("/Accounts/{accountSid}/Clients.json")
+@Path("/Accounts/{accountSid}/Geolocation.json")
 @ThreadSafe
 public class GeolocationJsonEndpoint extends GeolocationEndpoint {
 

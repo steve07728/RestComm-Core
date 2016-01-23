@@ -154,9 +154,9 @@ public class MybatisGeolocationDao implements GeolocationDao {
         map.put("location_area_id", gl.getLocationAreaId());
         map.put("age_of_location_info", gl.getAgeOfLocationInfo());
         map.put("mobile_country_code", gl.getMobileCountryCode());
-        map.put("mobile_network_code", gl.getMobileCountryCode());
+        map.put("mobile_network_code", gl.getMobileNetworkCode());
         map.put("network_entity_address", gl.getNetworkEntityAddress());
-        map.put("device_latitude", gl.getDeviceIdentifier());
+        map.put("device_latitude", gl.getDeviceLatitude());
         map.put("device_longitude", gl.getDeviceLongitude());
         map.put("physical_address", gl.getPhysicalAddress());
         map.put("internet_address", gl.getInternetAddress());

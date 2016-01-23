@@ -19,6 +19,7 @@
  */
 package org.mobicents.servlet.restcomm.http;
 
+import java.math.BigInteger;
 import java.net.URI;
 
 import javax.ws.rs.core.MultivaluedMap;
@@ -97,6 +98,22 @@ public abstract class AbstractEndpoint {
             uri = URI.create(data.getFirst(name));
         }
         return uri;
+    }
+
+    protected Integer getInteger(final String name, final MultivaluedMap<String, String> data) {
+        Integer integer = null;
+        if (data.containsKey(name)) {
+            integer = new Integer(data.getFirst(name));
+        }
+        return integer;
+    }
+
+    protected BigInteger getBigInteger(final String name, final MultivaluedMap<String, String> data) {
+        BigInteger bigInteger = null;
+        if (data.containsKey(name)) {
+            bigInteger = new BigInteger(data.getFirst(name));
+        }
+        return bigInteger;
     }
 
     protected boolean getHasVoiceCallerIdLookup(final MultivaluedMap<String, String> data) {

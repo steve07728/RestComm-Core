@@ -29,7 +29,7 @@ import org.joda.time.DateTime;
 import org.mobicents.servlet.restcomm.annotations.concurrency.NotThreadSafe;
 
 /**
- * @author Fernando Mendioroz
+ * @author fernando.mendioroz@telestax.com (Fernando Mendioroz)
  *
  */
 public class Geolocation {

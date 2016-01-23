@@ -32,7 +32,6 @@ import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
-import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
 
@@ -137,19 +136,19 @@ public abstract class GeolocationEndpoint extends AbstractEndpoint {
         builder.setDeviceIdentifier(data.getFirst("DeviceIdentifier"));
         builder.setGlobalCellId(data.getFirst("GlobalCellId"));
         builder.setLocationAreaId(data.getFirst("LocationAreaId"));
-        builder.setAgeOfLocationInfo(new Integer(data.getFirst("AgeOfLocationInfo")));
-        builder.setMobileCountryCode(new Integer(data.getFirst("MobileCountryCode")));
-        builder.setMobileNetworkCode(new Integer(data.getFirst("MobileNetworkCode")));
-        builder.setNetworkEntityAddress(new BigInteger(data.getFirst("NetworkEntityAddress")));
+        builder.setAgeOfLocationInfo(getInteger("AgeOfLocationInfo", data));
+        builder.setMobileCountryCode(getInteger("MobileCountryCode", data));
+        builder.setMobileNetworkCode(getInteger("MobileNetworkCode", data));
+        builder.setNetworkEntityAddress(getBigInteger("NetworkEntityAddress", data));
         builder.setDeviceLatitude(data.getFirst("DeviceLatitude"));
         builder.setDeviceLongitude(data.getFirst("DeviceLongitude"));
         builder.setPhysicalAddress(data.getFirst("PhysicalAddress"));
         builder.setInternetAddress(data.getFirst("InternetAddress"));
-        builder.setRadius(new BigInteger(data.getFirst("Radius")));
-        builder.setInterval(new BigInteger(data.getFirst("Interval")));
+        builder.setRadius(getBigInteger("Radius", data));
+        builder.setInterval(getBigInteger("Interval", data));
         builder.setOccurrence(data.getFirst("Occurrence"));
-        builder.setGeoLocationType(data.getFirst("GeoLocationType"));
-        builder.setGeoLocationResponseTime(new BigInteger(data.getFirst("GeoLocationResponseTime")));
+        builder.setGeoLocationType(data.getFirst("GeolocationType"));
+        builder.setGeoLocationResponseTime(getBigInteger("GeolocationResponseTime", data));
         builder.setStatus(data.getFirst("Status"));
         builder.setApiVersion(getApiVersion(data));
         String rootUri = configuration.getString("root-uri");
@@ -266,15 +265,15 @@ public abstract class GeolocationEndpoint extends AbstractEndpoint {
         }
 
         if (data.containsKey("MobileCountryCode")) {
-            result = result.setMobileCountryCode(new Integer(data.getFirst("MobileCountryCode")));
+            result = result.setMobileCountryCode(getInteger("MobileCountryCode", data));
         }
 
         if (data.containsKey("MobileNetworkCode")) {
-            result = result.setMobileNetworkCode(new Integer(data.getFirst("MobileNetworkCode")));
+            result = result.setMobileNetworkCode(getInteger("MobileNetworkCode", data));
         }
 
         if (data.containsKey("NetworkEntityAddress")) {
-            result = result.setNetworkEntityAddress(new BigInteger(data.getFirst("NetworkEntityAddress")));
+            result = result.setNetworkEntityAddress(getBigInteger("NetworkEntityAddress", data));
         }
 
         if (data.containsKey("DeviceLatitude")) {
@@ -294,19 +293,23 @@ public abstract class GeolocationEndpoint extends AbstractEndpoint {
         }
 
         if (data.containsKey("Radius")) {
-            result = result.setRadius(new BigInteger(data.getFirst("Radius")));
+            result = result.setRadius(getBigInteger("Radius", data));
         }
 
         if (data.containsKey("Interval")) {
-            result = result.setInterval(new BigInteger(data.getFirst("Interval")));
+            result = result.setInterval(getBigInteger("Interval", data));
         }
 
         if (data.containsKey("Occurrence")) {
             result = result.setOccurrence(data.getFirst("Occurrence"));
         }
 
-        if (data.containsKey("GeoLocationType")) {
-            result = result.setGeoLocationType(data.getFirst("GeoLocationType"));
+        if (data.containsKey("GeolocationResponseTime")) {
+            result = result.setGeoLocationResponseTime(getBigInteger("GeolocationResponseTime", data));
+        }
+
+        if (data.containsKey("GeolocationType")) {
+            result = result.setGeoLocationType(data.getFirst("GeolocationType"));
         }
 
         if (data.containsKey("Status")) {
