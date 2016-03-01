@@ -132,16 +132,16 @@ public class UssdCall extends UntypedActor  {
         super();
         final ActorRef source = self();
         // Initialize the states for the FSM.
-        uninitialized = new State("uninitialized", null, null);
-        ringing = new State("ringing", new Ringing(source), null);
-        inProgress = new State("in progress", new InProgress(source), null);
-        ready = new State("answering", new Ready(source), null);
-        processingUssdMessage = new State("processing UssdMessage", new ProcessingUssdMessage(source), null);
-        completed = new State("Completed", new Completed(source), null);
-        queued = new State("queued", new Queued(source), null);
-        dialing = new State("dialing", new Dialing(source), null);
-        disconnecting = new State("Disconnecting", new Disconnecting(source), null);
-        cancelling = new State("Cancelling", new Cancelling(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        ringing = new State("ringing", new Ringing(source), null, null);
+        inProgress = new State("in progress", new InProgress(source), null, null);
+        ready = new State("answering", new Ready(source), null, null);
+        processingUssdMessage = new State("processing UssdMessage", new ProcessingUssdMessage(source), null, null);
+        completed = new State("Completed", new Completed(source), null, null);
+        queued = new State("queued", new Queued(source), null, null);
+        dialing = new State("dialing", new Dialing(source), null, null);
+        disconnecting = new State("Disconnecting", new Disconnecting(source), null, null);
+        cancelling = new State("Cancelling", new Cancelling(source), null, null);
 
         // Initialize the transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

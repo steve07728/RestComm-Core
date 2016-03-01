@@ -86,14 +86,14 @@ public final class Conference extends UntypedActor {
         final ActorRef source = self();
 
         // Finite states
-        this.uninitialized = new State("uninitialized", null, null);
-        this.initializing = new State("initialiing", new Initializing(source));
-        this.waiting = new State("waiting", new Waiting(source));
-        this.running = new State("running", new Running(source));
-        this.evicting = new State("evicting", new Evicting(source));
-        this.stopping = new State("stopping", new Stopping(source));
-        this.stopped = new State("stopped", new Stopped(source));
-        this.failed = new State("failed", new Failed(source));
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.initializing = new State("initialiing", null, new Initializing(source), null);
+        this.waiting = new State("waiting", null, new Waiting(source), null);
+        this.running = new State("running", null, new Running(source), null);
+        this.evicting = new State("evicting", null, new Evicting(source), null);
+        this.stopping = new State("stopping", null, new Stopping(source), null);
+        this.stopped = new State("stopped", null, new Stopped(source), null);
+        this.failed = new State("failed", null, new Failed(source), null);
 
         // State transitions
         final Set<Transition> transitions = new HashSet<Transition>();

@@ -122,11 +122,11 @@ public final class SubVoiceInterpreter extends BaseVoiceInterpreter {
             final ActorRef conferenceManager, final ActorRef sms, final DaoManager storage, final Boolean hangupOnEnd) {
         super();
         source = self();
-        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null);
-        ready = new State("ready", new Ready(source), null);
-        notFound = new State("notFound", new NotFound(source), null);
-        rejecting = new State("rejecting", new Rejecting(source), null);
-        finished = new State("finished", new Finished(source), null);
+        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null, null);
+        ready = new State("ready", new Ready(source), null, null);
+        notFound = new State("notFound", new NotFound(source), null, null);
+        rejecting = new State("rejecting", new Rejecting(source), null, null);
+        finished = new State("finished", new Finished(source), null, null);
 
         transitions.add(new Transition(acquiringAsrInfo, finished));
         transitions.add(new Transition(acquiringSynthesizerInfo, finished));

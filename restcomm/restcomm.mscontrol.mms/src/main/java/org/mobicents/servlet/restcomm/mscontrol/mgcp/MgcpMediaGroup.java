@@ -114,19 +114,19 @@ public class MgcpMediaGroup extends MediaGroup {
         super();
         final ActorRef source = self();
         // Initialize the states for the FSM.
-        uninitialized = new State("uninitialized", null, null);
-        active = new State("active", new Active(source), null);
-        inactive = new State("inactive", new Inactive(source), null);
-        acquiringIvr = new State("acquiring ivr", new AcquiringIvr(source), null);
-        acquiringLink = new State("acquiring link", new AcquiringLink(source), null);
-        initializingLink = new State("initializing link", new InitializingLink(source), null);
-        openingLink = new State("opening link", new OpeningLink(source), null);
-        updatingLink = new State("updating link", new UpdatingLink(source), null);
-        deactivating = new State("deactivating", new Deactivating(source), null);
-        acquiringInternalLink = new State("acquiring internal link", new AcquiringInternalLink(source), null);
-        initializingInternalLink = new State("initializing internal link", new InitializingInternalLink(source), null);
-        openingInternalLink = new State("opening internal link", new OpeningInternalLink(source), null);
-        updatingInternalLink = new State("updating internal link", new UpdatingInternalLink(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        active = new State("active", new Active(source), null, null);
+        inactive = new State("inactive", new Inactive(source), null, null);
+        acquiringIvr = new State("acquiring ivr", new AcquiringIvr(source), null, null);
+        acquiringLink = new State("acquiring link", new AcquiringLink(source), null, null);
+        initializingLink = new State("initializing link", new InitializingLink(source), null, null);
+        openingLink = new State("opening link", new OpeningLink(source), null, null);
+        updatingLink = new State("updating link", new UpdatingLink(source), null, null);
+        deactivating = new State("deactivating", new Deactivating(source), null, null);
+        acquiringInternalLink = new State("acquiring internal link", new AcquiringInternalLink(source), null, null);
+        initializingInternalLink = new State("initializing internal link", new InitializingInternalLink(source), null, null);
+        openingInternalLink = new State("opening internal link", new OpeningInternalLink(source), null, null);
+        updatingInternalLink = new State("updating internal link", new UpdatingInternalLink(source), null, null);
         // Initialize the transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();
         transitions.add(new Transition(uninitialized, acquiringIvr));

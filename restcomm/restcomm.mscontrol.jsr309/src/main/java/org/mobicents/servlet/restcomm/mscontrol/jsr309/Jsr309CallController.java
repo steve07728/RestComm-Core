@@ -177,13 +177,13 @@ public class Jsr309CallController extends MediaServerController {
         this.recorderListener = new RecorderListener();
 
         // Initialize the states for the FSM
-        this.uninitialized = new State("uninitialized", null);
-        this.initializing = new State("initializing", new Initializing(source));
-        this.active = new State("active", new Active(source));
-        this.pending = new State("pending", new Pending(source));
-        this.updatingMediaSession = new State("updating media session", new UpdatingMediaSession(source));
-        this.inactive = new State("inactive", new Inactive(source));
-        this.failed = new State("failed", new Failed(source));
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.initializing = new State("initializing", null, new Initializing(source), null);
+        this.active = new State("active", null, new Active(source), null);
+        this.pending = new State("pending", null, new Pending(source), null);
+        this.updatingMediaSession = new State("updating media session", null, new UpdatingMediaSession(source), null);
+        this.inactive = new State("inactive", null, new Inactive(source), null);
+        this.failed = new State("failed", null, new Failed(source), null);
 
         // Transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

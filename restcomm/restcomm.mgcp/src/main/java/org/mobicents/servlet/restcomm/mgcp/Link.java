@@ -90,16 +90,16 @@ public final class Link extends UntypedActor {
         super();
         final ActorRef source = self();
         // Initialize the states for the FSM.
-        uninitialized = new State("uninitialized", null, null);
-        closed = new State("closed", new ClosedAction(source), null);
-        open = new State("open", new OpenAction(source), null);
-        initializingPrimary = new State("initializing primary", new InitializingPrimary(source), null);
-        initializingSecondary = new State("initializing secondary", new EnteringInitializingSecondary(source),
+        uninitialized = new State("uninitialized", null, null, null);
+        closed = new State("closed", new ClosedAction(source), null, null);
+        open = new State("open", new OpenAction(source), null, null);
+        initializingPrimary = new State("initializing primary", new InitializingPrimary(source), null, null);
+        initializingSecondary = new State("initializing secondary", new EnteringInitializingSecondary(source), null,
                 new ExitingInitializingSecondary(source));
-        closingPrimary = new State("closing primary", new ClosingPrimary(source), null);
-        closingSecondary = new State("closing secondary", new ClosingSecondary(source), null);
-        opening = new State("opening", new Opening(source), null);
-        modifying = new State("modifying", new Modifying(source), null);
+        closingPrimary = new State("closing primary", new ClosingPrimary(source), null, null);
+        closingSecondary = new State("closing secondary", new ClosingSecondary(source), null, null);
+        opening = new State("opening", new Opening(source), null, null);
+        modifying = new State("modifying", new Modifying(source), null, null);
         // Initialize the main transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();
         transitions.add(new Transition(uninitialized, initializingPrimary));

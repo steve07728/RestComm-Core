@@ -87,15 +87,15 @@ public class Bridge extends UntypedActor {
         this.mscontroller = mscontroller;
 
         // States for the FSM
-        this.uninitialized = new State("uninitialized", null, null);
-        this.initializing = new State("initializing", new Initializing(source), null);
-        this.ready = new State("ready", new Ready(source), null);
-        this.bridging = new State("bridging", new Bridging(source), null);
-        this.halfBridged = new State("half bridged", new HalfBridged(source), null);
-        this.bridged = new State("bridged", new Bridged(source), null);
-        this.stopping = new State("stopping", new Stopping(source), null);
-        this.failed = new State("failed", new Failed(source), null);
-        this.complete = new State("complete", new Complete(source), null);
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.initializing = new State("initializing", new Initializing(source), null, null);
+        this.ready = new State("ready", new Ready(source), null, null);
+        this.bridging = new State("bridging", new Bridging(source), null, null);
+        this.halfBridged = new State("half bridged", new HalfBridged(source), null, null);
+        this.bridged = new State("bridged", new Bridged(source), null, null);
+        this.stopping = new State("stopping", new Stopping(source), null, null);
+        this.failed = new State("failed", new Failed(source), null, null);
+        this.complete = new State("complete", new Complete(source), null, null);
 
         // State transitions
         final Set<Transition> transitions = new HashSet<Transition>();

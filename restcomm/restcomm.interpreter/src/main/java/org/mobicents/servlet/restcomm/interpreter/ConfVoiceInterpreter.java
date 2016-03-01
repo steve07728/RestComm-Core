@@ -154,23 +154,23 @@ public class ConfVoiceInterpreter extends UntypedActor {
         super();
 
         source = self();
-        uninitialized = new State("uninitialized", null, null);
+        uninitialized = new State("uninitialized", null, null, null);
 
-        acquiringSynthesizerInfo = new State("acquiring tts info", new AcquiringSpeechSynthesizerInfo(source), null);
-        acquiringConfMediaGroup = new State("acquiring call media group", new AcquiringConferenceMediaGroup(source), null);
-        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null);
+        acquiringSynthesizerInfo = new State("acquiring tts info", new AcquiringSpeechSynthesizerInfo(source), null, null);
+        acquiringConfMediaGroup = new State("acquiring call media group", new AcquiringConferenceMediaGroup(source), null, null);
+        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null, null);
         initializingConfMediaGroup = new State("initializing call media group", new InitializingConferenceMediaGroup(source),
-                null);
-        ready = new State("ready", new Ready(source), null);
-        notFound = new State("notFound", new NotFound(source), null);
+                null, null);
+        ready = new State("ready", new Ready(source), null, null);
+        notFound = new State("notFound", new NotFound(source), null, null);
 
-        caching = new State("caching", new Caching(source), null);
-        checkingCache = new State("checkingCache", new CheckCache(source), null);
-        playing = new State("playing", new Playing(source), null);
-        synthesizing = new State("synthesizing", new Synthesizing(source), null);
-        redirecting = new State("redirecting", new Redirecting(source), null);
+        caching = new State("caching", new Caching(source), null, null);
+        checkingCache = new State("checkingCache", new CheckCache(source), null, null);
+        playing = new State("playing", new Playing(source), null, null);
+        synthesizing = new State("synthesizing", new Synthesizing(source), null, null);
+        redirecting = new State("redirecting", new Redirecting(source), null, null);
 
-        finished = new State("finished", new Finished(source), null);
+        finished = new State("finished", new Finished(source), null, null);
 
         // Initialize the transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

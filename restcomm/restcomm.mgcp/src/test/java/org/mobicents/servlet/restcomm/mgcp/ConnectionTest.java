@@ -254,9 +254,9 @@ public final class ConnectionTest {
         public MockMediaGateway() {
             super();
             final ActorRef source = self();
-            closed = new State("closed", new Closed(), null);
-            halfOpen = new State("half open", new Open(), null);
-            open = new State("open", new Open(), null);
+            closed = new State("closed", new Closed(), null, null);
+            halfOpen = new State("half open", new Open(), null, null);
+            open = new State("open", new Open(), null, null);
             final Set<Transition> transitions = new HashSet<Transition>();
             transitions.add(new Transition(closed, halfOpen));
             transitions.add(new Transition(closed, open));

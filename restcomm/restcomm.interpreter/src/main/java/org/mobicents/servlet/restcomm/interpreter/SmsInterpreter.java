@@ -155,17 +155,17 @@ public final class SmsInterpreter extends UntypedActor {
             final String fallbackMethod) {
         super();
         final ActorRef source = self();
-        uninitialized = new State("uninitialized", null, null);
-        acquiringLastSmsRequest = new State("acquiring last sms event", new AcquiringLastSmsEvent(source), null);
-        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null);
-        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null);
-        ready = new State("ready", new Ready(source), null);
-        redirecting = new State("redirecting", new Redirecting(source), null);
-        creatingSmsSession = new State("creating sms session", new CreatingSmsSession(source), null);
-        sendingSms = new State("sending sms", new SendingSms(source), null);
-        waitingForSmsResponses = new State("waiting for sms responses", new WaitingForSmsResponses(source), null);
-        sendingEmail = new State("sending Email", new SendingEmail(source), null);
-        finished = new State("finished", new Finished(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        acquiringLastSmsRequest = new State("acquiring last sms event", new AcquiringLastSmsEvent(source), null, null);
+        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null, null);
+        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null, null);
+        ready = new State("ready", new Ready(source), null, null);
+        redirecting = new State("redirecting", new Redirecting(source), null, null);
+        creatingSmsSession = new State("creating sms session", new CreatingSmsSession(source), null, null);
+        sendingSms = new State("sending sms", new SendingSms(source), null, null);
+        waitingForSmsResponses = new State("waiting for sms responses", new WaitingForSmsResponses(source), null, null);
+        sendingEmail = new State("sending Email", new SendingEmail(source), null, null);
+        finished = new State("finished", new Finished(source), null, null);
         // Initialize the transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();
         transitions.add(new Transition(uninitialized, acquiringLastSmsRequest));

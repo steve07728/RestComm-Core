@@ -197,26 +197,26 @@ public final class Call extends UntypedActor {
         final ActorRef source = self();
 
         // States for the FSM
-        this.uninitialized = new State("uninitialized", null, null);
-        this.initializing = new State("initializing", new Initializing(source), null);
-        this.queued = new State("queued", new Queued(source), null);
-        this.ringing = new State("ringing", new Ringing(source), null);
-        this.failingBusy = new State("failing busy", new FailingBusy(source), null);
-        this.busy = new State("busy", new Busy(source), null);
-        this.notFound = new State("not found", new NotFound(source), null);
-        //This time the --new Canceling(source)-- is an ActionOnState. Overloaded constructor is used here
-        this.canceling = new State("canceling", new Canceling(source));
-        this.canceled = new State("canceled", new Canceled(source), null);
-        this.failingNoAnswer = new State("failing no answer", new FailingNoAnswer(source), null);
-        this.noAnswer = new State("no answer", new NoAnswer(source), null);
-        this.dialing = new State("dialing", new Dialing(source), null);
-        this.updatingMediaSession = new State("updating media session", new UpdatingMediaSession(source), null);
-        this.inProgress = new State("in progress", new InProgress(source), null);
-        this.joining = new State("joining", new Joining(source), null);
-        this.leaving = new State("leaving", new Leaving(source), null);
-        this.stopping = new State("stopping", new Stopping(source), null);
-        this.completed = new State("completed", new Completed(source), null);
-        this.failed = new State("failed", new Failed(source), null);
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.initializing = new State("initializing", new Initializing(source), null, null);
+        this.queued = new State("queued", new Queued(source), null, null);
+        this.ringing = new State("ringing", new Ringing(source), null, null);
+        this.failingBusy = new State("failing busy", new FailingBusy(source), null, null);
+        this.busy = new State("busy", new Busy(source), null, null);
+        this.notFound = new State("not found", new NotFound(source), null, null);
+        //This time the --new Canceling(source)-- is an ActionOnState.
+        this.canceling = new State("canceling", null, new Canceling(source), null);
+        this.canceled = new State("canceled", new Canceled(source), null, null);
+        this.failingNoAnswer = new State("failing no answer", new FailingNoAnswer(source), null, null);
+        this.noAnswer = new State("no answer", new NoAnswer(source), null, null);
+        this.dialing = new State("dialing", new Dialing(source), null, null);
+        this.updatingMediaSession = new State("updating media session", new UpdatingMediaSession(source), null, null);
+        this.inProgress = new State("in progress", new InProgress(source), null, null);
+        this.joining = new State("joining", new Joining(source), null, null);
+        this.leaving = new State("leaving", new Leaving(source), null, null);
+        this.stopping = new State("stopping", new Stopping(source), null, null);
+        this.completed = new State("completed", new Completed(source), null, null);
+        this.failed = new State("failed", new Failed(source), null, null);
 
         // Transitions for the FSM
         final Set<Transition> transitions = new HashSet<Transition>();

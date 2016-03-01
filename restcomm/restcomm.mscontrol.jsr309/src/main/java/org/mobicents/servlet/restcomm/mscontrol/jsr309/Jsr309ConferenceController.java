@@ -124,11 +124,11 @@ public class Jsr309ConferenceController extends MediaServerController {
         this.playing = Boolean.FALSE;
 
         // Initialize the states for the FSM
-        this.uninitialized = new State("uninitialized", null);
-        this.initializing = new State("initializing", new Initializing(source));
-        this.active = new State("active", new Active(source));
-        this.inactive = new State("inactive", new Inactive(source));
-        this.failed = new State("failed", new Failed(source));
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.initializing = new State("initializing", null, new Initializing(source), null);
+        this.active = new State("active", null, new Active(source), null);
+        this.inactive = new State("inactive", null, new Inactive(source), null);
+        this.failed = new State("failed", null, new Failed(source), null);
 
         // Transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

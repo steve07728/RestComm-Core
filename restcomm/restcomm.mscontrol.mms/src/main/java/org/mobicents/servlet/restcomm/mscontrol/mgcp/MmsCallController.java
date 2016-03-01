@@ -175,29 +175,29 @@ public class MmsCallController extends MediaServerController {
         final ActorRef source = self();
 
         // Initialize the states for the FSM.
-        this.uninitialized = new State("uninitialized", null, null);
-        this.acquiringMediaGatewayInfo = new State("acquiring media gateway info", new AcquiringMediaGatewayInfo(source), null);
-        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(source), null);
-        this.acquiringBridge = new State("acquiring media bridge", new AcquiringBridge(source), null);
-        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(source), null);
-        this.acquiringRemoteConnection = new State("acquiring connection", new AcquiringRemoteConnection(source), null);
-        this.initializingRemoteConnection = new State("initializing connection", new InitializingRemoteConnection(source), null);
-        this.openingRemoteConnection = new State("opening connection", new OpeningRemoteConnection(source), null);
-        this.updatingRemoteConnection = new State("updating connection", new UpdatingRemoteConnection(source), null);
-        this.pending = new State("pending", new Pending(source), null);
-        this.active = new State("active", new Active(source), null);
-        this.muting = new State("muting", new Muting(source), null);
-        this.unmuting = new State("unmuting", new Unmuting(source), null);
-        this.acquiringInternalLink = new State("acquiring link", new AcquiringInternalLink(source), null);
-        this.initializingInternalLink = new State("initializing link", new InitializingInternalLink(source), null);
-        this.openingInternalLink = new State("opening link", new OpeningInternalLink(source), null);
-        this.updatingInternalLink = new State("updating link", new UpdatingInternalLink(source), null);
-        this.closingInternalLink = new State("closing link", new EnterClosingInternalLink(source), new ExitClosingInternalLink(
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.acquiringMediaGatewayInfo = new State("acquiring media gateway info", new AcquiringMediaGatewayInfo(source), null, null);
+        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(source), null, null);
+        this.acquiringBridge = new State("acquiring media bridge", new AcquiringBridge(source), null, null);
+        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(source), null, null);
+        this.acquiringRemoteConnection = new State("acquiring connection", new AcquiringRemoteConnection(source), null, null);
+        this.initializingRemoteConnection = new State("initializing connection", new InitializingRemoteConnection(source), null, null);
+        this.openingRemoteConnection = new State("opening connection", new OpeningRemoteConnection(source), null, null);
+        this.updatingRemoteConnection = new State("updating connection", new UpdatingRemoteConnection(source), null, null);
+        this.pending = new State("pending", new Pending(source), null, null);
+        this.active = new State("active", new Active(source), null, null);
+        this.muting = new State("muting", new Muting(source), null, null);
+        this.unmuting = new State("unmuting", new Unmuting(source), null, null);
+        this.acquiringInternalLink = new State("acquiring link", new AcquiringInternalLink(source), null, null);
+        this.initializingInternalLink = new State("initializing link", new InitializingInternalLink(source), null, null);
+        this.openingInternalLink = new State("opening link", new OpeningInternalLink(source), null, null);
+        this.updatingInternalLink = new State("updating link", new UpdatingInternalLink(source), null, null);
+        this.closingInternalLink = new State("closing link", new EnterClosingInternalLink(source), null, new ExitClosingInternalLink(
                 source));
-        this.closingRemoteConnection = new State("closing connection", new ClosingRemoteConnection(source), null);
-        this.stopping = new State("stopping", new Stopping(source));
-        this.inactive = new State("inactive", new Inactive(source));
-        this.failed = new State("failed", new Failed(source));
+        this.closingRemoteConnection = new State("closing connection", new ClosingRemoteConnection(source), null, null);
+        this.stopping = new State("stopping", null, new Stopping(source), null);
+        this.inactive = new State("inactive", null, new Inactive(source), null);
+        this.failed = new State("failed", null, new Failed(source), null);
 
         // Transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

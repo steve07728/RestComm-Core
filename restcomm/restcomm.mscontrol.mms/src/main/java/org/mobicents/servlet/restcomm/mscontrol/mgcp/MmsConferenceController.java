@@ -108,14 +108,14 @@ public final class MmsConferenceController extends MediaServerController {
         final ActorRef source = self();
 
         // Finite States
-        this.uninitialized = new State("uninitialized", null, null);
-        this.active = new State("active", new Active(source), null);
-        this.inactive = new State("inactive", new Inactive(source), null);
-        this.failed = new State("failed", new Failed(source), null);
-        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(source), null);
-        this.acquiringEndpoint = new State("acquiring endpoint", new AcquiringEndpoint(source), null);
-        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(source), null);
-        this.stopping = new State("stopping", new Stopping(source), null);
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.active = new State("active", new Active(source), null, null);
+        this.inactive = new State("inactive", new Inactive(source), null, null);
+        this.failed = new State("failed", new Failed(source), null, null);
+        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(source), null, null);
+        this.acquiringEndpoint = new State("acquiring endpoint", new AcquiringEndpoint(source), null, null);
+        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(source), null, null);
+        this.stopping = new State("stopping", new Stopping(source), null, null);
 
         // Initialize the transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();

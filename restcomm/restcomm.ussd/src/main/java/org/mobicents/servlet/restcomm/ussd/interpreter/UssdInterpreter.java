@@ -177,21 +177,21 @@ public class UssdInterpreter extends UntypedActor {
         super();
         final ActorRef source = self();
 
-        uninitialized = new State("uninitialized", null, null);
-        observeCall = new State("observe call", new ObserveCall(source), null);
-        acquiringCallInfo = new State("acquiring call info", new AcquiringCallInfo(source), null);
-        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null);
-        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null);
-        preparingMessage = new State("Preparing message", new PreparingMessage(source), null);
-        processingInfoRequest = new State("Processing info request from client", new ProcessingInfoRequest(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        observeCall = new State("observe call", new ObserveCall(source), null, null);
+        acquiringCallInfo = new State("acquiring call info", new AcquiringCallInfo(source), null, null);
+        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null, null);
+        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null, null);
+        preparingMessage = new State("Preparing message", new PreparingMessage(source), null, null);
+        processingInfoRequest = new State("Processing info request from client", new ProcessingInfoRequest(source), null, null);
 
-        ready = new State("ready", new Ready(source), null);
-        notFound = new State("notFound", new NotFound(source), null);
+        ready = new State("ready", new Ready(source), null, null);
+        notFound = new State("notFound", new NotFound(source), null, null);
 
-        cancelling = new State("Cancelling", new Cancelling(source), null);
-        disconnecting = new State("Disconnecting", new Disconnecting(source), null);
+        cancelling = new State("Cancelling", new Cancelling(source), null, null);
+        disconnecting = new State("Disconnecting", new Disconnecting(source), null, null);
 
-        finished = new State("finished", new Finished(source), null);
+        finished = new State("finished", new Finished(source), null, null);
 
         transitions.add(new Transition(uninitialized, acquiringCallInfo));
         transitions.add(new Transition(uninitialized, cancelling));

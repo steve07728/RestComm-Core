@@ -94,15 +94,15 @@ public final class Connection extends UntypedActor {
         super();
         final ActorRef source = self();
         // Initialize the states for the FSM.
-        uninitialized = new State("uninitialized", null, null);
-        closed = new State("closed", new Closed(source), null);
-        halfOpen = new State("half open", new HalfOpen(source), null);
-        open = new State("open", new Open(source), null);
-        initializing = new State("initializing", new EnteringInitialization(source), new ExitingInitialization(source));
-        closing = new State("closing", new Closing(source), null);
-        openingHalfWay = new State("opening halfway", new OpeningHalfWay(source), null);
-        opening = new State("opening", new Opening(source), null);
-        modifying = new State("modifying", new Modifying(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        closed = new State("closed", new Closed(source), null, null);
+        halfOpen = new State("half open", new HalfOpen(source), null, null);
+        open = new State("open", new Open(source), null, null);
+        initializing = new State("initializing", new EnteringInitialization(source), null, new ExitingInitialization(source));
+        closing = new State("closing", new Closing(source), null, null);
+        openingHalfWay = new State("opening halfway", new OpeningHalfWay(source), null, null);
+        opening = new State("opening", new Opening(source), null, null);
+        modifying = new State("modifying", new Modifying(source), null, null);
         // Initialize the main transitions for the FSM.
         final Set<Transition> transitions = new HashSet<Transition>();
         transitions.add(new Transition(uninitialized, initializing));

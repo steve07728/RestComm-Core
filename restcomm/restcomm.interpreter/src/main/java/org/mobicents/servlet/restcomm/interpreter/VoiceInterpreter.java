@@ -201,28 +201,28 @@ public final class VoiceInterpreter extends BaseVoiceInterpreter {
                             final ActorRef conferenceManager, final ActorRef bridgeManager, final ActorRef sms, final DaoManager storage, final ActorRef monitoring) {
         super();
         final ActorRef source = self();
-        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null);
-        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null);
-        initializingCall = new State("initializing call", new InitializingCall(source), null);
+        downloadingRcml = new State("downloading rcml", new DownloadingRcml(source), null, null);
+        downloadingFallbackRcml = new State("downloading fallback rcml", new DownloadingFallbackRcml(source), null, null);
+        initializingCall = new State("initializing call", new InitializingCall(source), null, null);
         // initializedCall = new State("initialized call", new InitializedCall(source), new PostInitializedCall(source));
-        ready = new State("ready", new Ready(source), null);
-        notFound = new State("notFound", new NotFound(source), null);
-        rejecting = new State("rejecting", new Rejecting(source), null);
-        startDialing = new State("start dialing", new StartDialing(source), null);
-        processingDialChildren = new State("processing dial children", new ProcessingDialChildren(source), null);
-        acquiringOutboundCallInfo = new State("acquiring outbound call info", new AcquiringOutboundCallInfo(source), null);
-        forking = new State("forking", new Forking(source), null);
+        ready = new State("ready", new Ready(source), null, null);
+        notFound = new State("notFound", new NotFound(source), null, null);
+        rejecting = new State("rejecting", new Rejecting(source), null, null);
+        startDialing = new State("start dialing", new StartDialing(source), null, null);
+        processingDialChildren = new State("processing dial children", new ProcessingDialChildren(source), null, null);
+        acquiringOutboundCallInfo = new State("acquiring outbound call info", new AcquiringOutboundCallInfo(source), null, null);
+        forking = new State("forking", new Forking(source), null, null);
         // joiningCalls = new State("joining calls", new JoiningCalls(source), null);
-        this.creatingBridge = new State("creating bridge", new CreatingBridge(source), null);
-        this.initializingBridge = new State("initializing bridge", new InitializingBridge(source), null);
-        this.bridging = new State("bridging", new Bridging(source), null);
-        bridged = new State("bridged", new Bridged(source), null);
-        finishDialing = new State("finish dialing", new FinishDialing(source), null);
-        acquiringConferenceInfo = new State("acquiring conference info", new AcquiringConferenceInfo(source), null);
-        joiningConference = new State("joining conference", new JoiningConference(source), null);
-        conferencing = new State("conferencing", new Conferencing(source), null);
-        finishConferencing = new State("finish conferencing", new FinishConferencing(source), null);
-        finished = new State("finished", new Finished(source), null);
+        this.creatingBridge = new State("creating bridge", new CreatingBridge(source), null, null);
+        this.initializingBridge = new State("initializing bridge", new InitializingBridge(source), null, null);
+        this.bridging = new State("bridging", new Bridging(source), null, null);
+        bridged = new State("bridged", new Bridged(source), null, null);
+        finishDialing = new State("finish dialing", new FinishDialing(source), null, null);
+        acquiringConferenceInfo = new State("acquiring conference info", new AcquiringConferenceInfo(source), null, null);
+        joiningConference = new State("joining conference", new JoiningConference(source), null, null);
+        conferencing = new State("conferencing", new Conferencing(source), null, null);
+        finishConferencing = new State("finish conferencing", new FinishConferencing(source), null, null);
+        finished = new State("finished", new Finished(source), null, null);
         /*
          * dialing = new State("dialing", null, null); bridging = new State("bridging", null, null); conferencing = new
          * State("conferencing", null, null);
@@ -845,7 +845,7 @@ public final class VoiceInterpreter extends BaseVoiceInterpreter {
         } else if (FaxResponse.class.equals(klass)) {
             fsm.transition(message, ready);
         } else if (EmailResponse.class.equals(klass)) {
-            final EmailResponse response = (EmailResponse) message;
+            final EmailResponse<?> response = (EmailResponse<?>) message;
             if (!response.succeeded()) {
                 logger.error(
                         "There was an error while sending an email :" + response.error(),

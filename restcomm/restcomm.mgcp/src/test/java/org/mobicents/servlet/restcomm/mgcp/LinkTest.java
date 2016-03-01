@@ -212,9 +212,9 @@ public class LinkTest {
         public MockMediaGateway() {
             super();
             final ActorRef source = self();
-            primaryClosed = new State("primaryClosed", new Closed(), null);
-            secondaryClosed = new State("secondaryClosed", new Closed(), null);
-            open = new State("open", new Open(), null);
+            primaryClosed = new State("primaryClosed", new Closed(), null, null);
+            secondaryClosed = new State("secondaryClosed", new Closed(), null, null);
+            open = new State("open", new Open(), null, null);
             final Set<Transition> transitions = new HashSet<Transition>();
             transitions.add(new Transition(secondaryClosed, open));
             transitions.add(new Transition(open, open));

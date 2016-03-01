@@ -113,14 +113,14 @@ public class MmsBridgeController extends MediaServerController {
         final ActorRef self = self();
 
         // Finite states
-        this.uninitialized = new State("uninitialized", null, null);
-        this.active = new State("active", new Active(self), null);
-        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(self), null);
-        this.acquiringEndpoint = new State("acquiring endpoint", new AcquiringEndpoint(self), null);
-        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(self), null);
-        this.stopping = new State("stopping", new Stopping(self));
-        this.inactive = new State("inactive", new Inactive(self));
-        this.failed = new State("failed", new Failed(self));
+        this.uninitialized = new State("uninitialized", null, null, null);
+        this.active = new State("active", new Active(self), null, null);
+        this.acquiringMediaSession = new State("acquiring media session", new AcquiringMediaSession(self), null, null);
+        this.acquiringEndpoint = new State("acquiring endpoint", new AcquiringEndpoint(self), null, null);
+        this.creatingMediaGroup = new State("creating media group", new CreatingMediaGroup(self), null, null);
+        this.stopping = new State("stopping", null, new Stopping(self), null);
+        this.inactive = new State("inactive", null, new Inactive(self), null);
+        this.failed = new State("failed", null, new Failed(self), null);
 
         // Finite State Machine
         final Set<Transition> transitions = new HashSet<Transition>();

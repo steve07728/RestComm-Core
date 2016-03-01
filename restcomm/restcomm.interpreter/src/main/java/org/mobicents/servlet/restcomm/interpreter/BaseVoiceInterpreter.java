@@ -254,27 +254,27 @@ public abstract class BaseVoiceInterpreter extends UntypedActor {
         super();
         final ActorRef source = self();
         // 20 States in common
-        uninitialized = new State("uninitialized", null, null);
-        acquiringAsrInfo = new State("acquiring asr info", new AcquiringAsrInfo(source), null);
-        acquiringSynthesizerInfo = new State("acquiring tts info", new AcquiringSpeechSynthesizerInfo(source), null);
-        acquiringCallInfo = new State("acquiring call info", new AcquiringCallInfo(source), null);
-        playingRejectionPrompt = new State("playing rejection prompt", new PlayingRejectionPrompt(source), null);
-        pausing = new State("pausing", new Pausing(source), null);
-        caching = new State("caching", new Caching(source), null);
-        checkingCache = new State("checkingCache", new CheckCache(source), null);
-        playing = new State("playing", new Playing(source), null);
-        synthesizing = new State("synthesizing", new Synthesizing(source), null);
-        redirecting = new State("redirecting", new Redirecting(source), null);
-        faxing = new State("faxing", new Faxing(source), null);
-        gathering = new State("gathering", new Gathering(source), null);
-        processingGatherChildren = new State("processing gather children", new ProcessingGatherChildren(source), null);
-        finishGathering = new State("finish gathering", new FinishGathering(source), null);
-        creatingRecording = new State("creating recording", new CreatingRecording(source), null);
-        finishRecording = new State("finish recording", new FinishRecording(source), null);
-        creatingSmsSession = new State("creating sms session", new CreatingSmsSession(source), null);
-        sendingSms = new State("sending sms", new SendingSms(source), null);
-        hangingUp = new State("hanging up", new HangingUp(source), null);
-        sendingEmail = new State("sending Email", new SendingEmail(source), null);
+        uninitialized = new State("uninitialized", null, null, null);
+        acquiringAsrInfo = new State("acquiring asr info", new AcquiringAsrInfo(source), null, null);
+        acquiringSynthesizerInfo = new State("acquiring tts info", new AcquiringSpeechSynthesizerInfo(source), null, null);
+        acquiringCallInfo = new State("acquiring call info", new AcquiringCallInfo(source), null, null);
+        playingRejectionPrompt = new State("playing rejection prompt", new PlayingRejectionPrompt(source), null, null);
+        pausing = new State("pausing", new Pausing(source), null, null);
+        caching = new State("caching", new Caching(source), null, null);
+        checkingCache = new State("checkingCache", new CheckCache(source), null, null);
+        playing = new State("playing", new Playing(source), null, null);
+        synthesizing = new State("synthesizing", new Synthesizing(source), null, null);
+        redirecting = new State("redirecting", new Redirecting(source), null, null);
+        faxing = new State("faxing", new Faxing(source), null, null);
+        gathering = new State("gathering", new Gathering(source), null, null);
+        processingGatherChildren = new State("processing gather children", new ProcessingGatherChildren(source), null, null);
+        finishGathering = new State("finish gathering", new FinishGathering(source), null, null);
+        creatingRecording = new State("creating recording", new CreatingRecording(source), null, null);
+        finishRecording = new State("finish recording", new FinishRecording(source), null, null);
+        creatingSmsSession = new State("creating sms session", new CreatingSmsSession(source), null, null);
+        sendingSms = new State("sending sms", new SendingSms(source), null, null);
+        hangingUp = new State("hanging up", new HangingUp(source), null, null);
+        sendingEmail = new State("sending Email", new SendingEmail(source), null, null);
 
         // Initialize the transitions for the FSM.
         transitions.add(new Transition(uninitialized, acquiringAsrInfo));
@@ -655,7 +655,7 @@ public abstract class BaseVoiceInterpreter extends UntypedActor {
                 from = attribute.value();
             }else{
                 Exception error = new Exception("From attribute was not defined");
-                source.tell(new EmailResponse(error,error.getMessage()), source);
+                source.tell(new EmailResponse<Object>(error,error.getMessage()), source);
                 return;
             }
 
@@ -666,7 +666,7 @@ public abstract class BaseVoiceInterpreter extends UntypedActor {
                 to = attribute.value();
             }else{
                 Exception error = new Exception("To attribute was not defined");
-                source.tell(new EmailResponse(error,error.getMessage()), source);
+                source.tell(new EmailResponse<Object>(error,error.getMessage()), source);
                 return;
             }
 
